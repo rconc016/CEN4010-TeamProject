@@ -1,6 +1,9 @@
 # CEN4010-TeamProject
 Team Project for CEN4010-RVC1188 (Software Engineering I) Fall 2018 at Florida International University
 
+## Build Status
+[![CircleCI](https://circleci.com/gh/rconc016/CEN4010-TeamProject/tree/master.svg?style=svg)](https://circleci.com/gh/rconc016/CEN4010-TeamProject/tree/master)
+
 ## Features
 - **Book Browsing and Sorting:** Allows users to browse books by genre, top sellers in our book store, and book rating with pagination based on 10 or 20 results. It also allows sorting by book title, author, price, book rating, and release date.
 
