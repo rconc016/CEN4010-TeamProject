@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\node_modules",
+    "\\node_modules\\sass-loader",
+    "\\node_modules\\sass-loader\\lib",
+    "\\src",
+    "\\src\\app"
+  ],
+  "SelectedNode": "\\node_modules\\sass-loader\\lib\\loader.js",
+  "PreviewInSolutionExplorer": false
+}
