@@ -1,8 +1,7 @@
-//Install express server
+// Install express server
 const express = require('express');
 const path = require('path');
 const app = express();
-const proxy = require('express-http-proxy');
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/'));
