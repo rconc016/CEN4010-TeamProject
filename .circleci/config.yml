@@ -80,6 +80,7 @@ workflows:
           requires:
             - build_web
             - build_api
+            - deploy_api
           filters:
             branches:
               only: master
