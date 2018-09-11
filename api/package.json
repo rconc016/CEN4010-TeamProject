@@ -1,0 +1,24 @@
+{
+  "name": "aspnet-core-demo-app",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Demo app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jincod/AspNet5DemoApp.git"
+  },
+  "dependencies": {
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
+    "react-scripts": "1.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:5000"
+    }
+  }
+}
