@@ -20,5 +20,9 @@
     "/api": {
       "target": "http://localhost:5000"
     }
+  },
+  "engines": {
+    "node": "10.10.0",
+    "npm": "6.4.1"
   }
 }

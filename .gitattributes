@@ -1,0 +1,3 @@
+#pattern  filter=crypt diff=crypt
+firestore-key.json  filter=crypt diff=crypt
+environment*.ts  filter=crypt diff=crypt
