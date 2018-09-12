@@ -1,16 +1,16 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-
-export const environment = {
-  production: false,
-  firebase: {
-    apiKey: "AIzaSyBM64NrPbX3OY-fJhejCAN9Bobc7SbQjj4",
-    authDomain: "tutorial-959a2.firebaseapp.com",
-    databaseURL: "https://tutorial-959a2.firebaseio.com",
-    projectId: "tutorial-959a2",
-    storageBucket: "tutorial-959a2.appspot.com",
-    messagingSenderId: "130709804927"
-  }
-};
+U2FsdGVkX1++qtE8YqctMCtK4H5DjqBxIQB8fxlcw1LZ04qlnH7QDmBjO9W4zoyW
+frVrj+JKSnSoXZFYuYikBCEnx4WOiM8wa2K6XQm9O0fSSwFneHNwiSPg1OyYqjED
+iA7ujwk1DDdib4FhVovJ4KcnMWgczCRiwJx0RsTQAAcw6LpkNQgoX8JpjR5Wi+F2
+2YGLwD26G0LydMKL0JTd3kLjtm9Fms8YnuioDg/kDvhb3bl4Lsy8t3+WuLiB/7xE
+ltUFEXJukh6sHmGO9KTQ/FeTrP9A/mUIXwXTdhFhToxAOw+cLXnrQj6Nn7HKzF1o
+GPiCAwHT3d92Yx0blWrg95i1W1x4jaOEvQqqRR+e6M+qdX+Xtt9vFP/ZIuKVvNl9
+W8CdB26srkWsrVoY3i/WjbnsjKLdNxuWu4dSSob6APJJMMxO/K6snkTSVdxqIigp
+bkg/M8BIPXMrDC8r4ESy8T5YGh2AeCZWMXU60XUvBhzgO7OwXVxlNzgnGYsxhXrH
+FEzwWvnAepH0y46rIjUQKOi7UfSBjZARGXPj3hXbAVJlXMnA31+R/BX1w699m+Uq
+lKYmHGbHfWoThF9LyIRtm1cUPr2K7U/E3q/A8QAYJCmzblRfiyFLfpQuRVqBGl5S
++Bl+yi4RS9CbNhSy8OHgotzLgjQIbvysKDyQxz+xlYHSuoaEGhEmV6CfO83TcwZ8
+t6tF4Vw6qEDVHWp+7V0L4gBuxKubL8YE3f2PV++vc8jhi+VZz9J9kTbUscTxN78s
+bLz8hP51i0ljxaEtklY0UCoYwftBTvLE9DB5ZGaKZjOnM92b6QP5A9+L3QkOmvw8
+uDUGJGkPE42r9PLLsxaPBnNkKrqDwQobXinMzB+5rOOc9UX184Sx8rYQr/i48auX
+UkvmntkYIK2LtVr3VzGMUmOyALTqI21lc1B0m4edvs7J1wy9FH4CN356RThMN/3m
+YSrZsgJ0FyokHc67BndMNw==

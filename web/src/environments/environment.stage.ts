@@ -1,11 +1,8 @@
-export const environment = {
-  production: true,
-  firebase: {
-    apiKey: "AIzaSyBM64NrPbX3OY-fJhejCAN9Bobc7SbQjj4",
-    authDomain: "tutorial-959a2.firebaseapp.com",
-    databaseURL: "https://tutorial-959a2.firebaseio.com",
-    projectId: "tutorial-959a2",
-    storageBucket: "tutorial-959a2.appspot.com",
-    messagingSenderId: "130709804927"
-  }
-};
+U2FsdGVkX18/zm7O+jKGwNbMJsuCp/fFZOtyh6y7FqEPik9lKI3+xBgJ4OJaTDpP
+O22Ye1a88Jyz4nlFoD6KYfWg+oBWhWDwHEsoKNsBuDZX9DJdkxoiDFaCSR2st6RV
+c0zQn1ssUBFfWTfKEzyKQ5ZAuQbGlFrL5pPSD7ChCHBQDatT3bD4HaiEbKlHKbU4
+3xm+pR/R8Dk0VRnwSawX80wvGLUnejy+jIUa5mGdevV+8NkcYclztuAVuUnn7R2a
+LU3g0/KOD6P2X6O81W/ZDjjHeNP6y7XnKo5cSS+7HzxT+Anm80DgVYrxeBeLQPrx
+sBFSu9A+V/uBMozNHhS4eV9XDMqpiQbrrwpGYqR0V5gB+zAcwikexyJ3G6T85zXH
+SZ0cZSXsxjXPW3dWocg+likPdIMPkphK64ISHoEbBtJzjXkD0Y3SnCQgnZWke/xi
+A510FuKONh7bKHh6KqDXN31tPSXiSbaohSFnVHB5zz7hu3fgB9DrXvJswrF5e9vm
