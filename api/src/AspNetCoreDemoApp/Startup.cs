@@ -1,4 +1,6 @@
 using System;
+using AspNetCoreDemoApp.Wrappers;
+using AspNetCoreDemoApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -11,6 +13,9 @@ namespace AspNetCoreDemoApp
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddTransient<IFirestoreDb, FirestoreDbWrapper>()
+                .AddScoped<IFirestoreService, FirestoreService>()
+                .AddScoped<IBookService, BookService>()
                 .AddMvcCore()
                 .AddCors()
                 .AddJsonFormatters();
