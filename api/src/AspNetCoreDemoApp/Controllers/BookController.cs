@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
 using AspNetCoreDemoApp.Models;
 using AspNetCoreDemoApp.Services;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreDemoApp.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	public class BookController : ControllerBase
 	{	
 		private IBookService bookService;

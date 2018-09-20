@@ -1,4 +1,3 @@
-using System;
 using Google.Cloud.Firestore;
 
 namespace AspNetCoreDemoApp.Models
