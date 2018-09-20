@@ -1,11 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Threading;
 using AspNetCoreDemoApp.Models;
-using AspNetCoreDemoApp.Services;
-using Google.Cloud.Firestore;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreDemoApp.Services
 {
@@ -20,9 +14,9 @@ namespace AspNetCoreDemoApp.Services
 			this.firestoreService = firestoreService;
 		}
 
-        public void Update(string bookId, object bookData, SetOptions options, CancellationToken cancellationToken)
+        public void Update(string bookId, Book bookData)
         {
-            firestoreService.Update(CollectionId, bookId, bookData, options, cancellationToken);
+            firestoreService.Update(CollectionId, bookId, bookData);
         }
 
         public IList<Book> FindAll()
