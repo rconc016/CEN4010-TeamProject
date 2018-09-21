@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AspNetCoreDemoApp.Models;
 using AspNetCoreDemoApp.Services;
+using AspNetCoreDemoApp.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreDemoApp.Controllers
@@ -20,8 +21,13 @@ namespace AspNetCoreDemoApp.Controllers
 		/// </summary>
 		/// <returns>A list of all <see href="Book">s available.</returns>
         [HttpGet]
-		public IEnumerable<Book> Get()
+		public IEnumerable<Book> Get([FromQuery] string sortKey, [FromQuery] SortDirection sortDirection)
 		{
+			if (sortKey != null)
+			{
+				return bookService.FindAll(sortKey, sortDirection);
+			}
+
 			return bookService.FindAll();
 		}
 

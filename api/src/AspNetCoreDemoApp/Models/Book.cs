@@ -1,3 +1,4 @@
+using System;
 using Google.Cloud.Firestore;
 
 namespace AspNetCoreDemoApp.Models
@@ -14,12 +15,12 @@ namespace AspNetCoreDemoApp.Models
         public string Author { get; set; }
 
         [FirestoreProperty(name: "price")]
-        public float Price { get; set; }
+        public string Price { get; set; }
 
         [FirestoreProperty(name: "rating")]
-        public float Rating { get; set; }
+        public string Rating { get; set; }
 
         [FirestoreProperty(name: "releaseDate")]
-        public string ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
     }
 }
