@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AspNetCoreDemoApp.Models;
+using AspNetCoreDemoApp.Utils;
 
 namespace AspNetCoreDemoApp.Services
 {
@@ -22,6 +23,11 @@ namespace AspNetCoreDemoApp.Services
         public IList<Book> FindAll()
         {
             return firestoreService.FindAll<Book>(CollectionId);
+        }
+
+        public IList<Book> FindAll(string field, SortDirection sortDirection)
+        {
+            return firestoreService.OrderBy(CollectionId, field, sortDirection).Execute<Book>();
         }
 
         public Book FindById(string bookId)
