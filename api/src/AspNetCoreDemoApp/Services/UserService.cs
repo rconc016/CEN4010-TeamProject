@@ -20,9 +20,9 @@ namespace AspNetCoreDemoApp.Services
             this.firestoreService = firestoreService;
         }
 
-        public void Update(string userId, object userData, SetOptions options, CancellationToken cancellationToken)
+        public void Update(string userId, User userData)
         {
-            firestoreService.Update(CollectionId, userId, userData, options, cancellationToken);
+            firestoreService.Update(CollectionId, userId, userData);
         }
 
         public IList<User> FindAll()

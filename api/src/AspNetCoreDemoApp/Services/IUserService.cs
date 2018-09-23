@@ -14,7 +14,7 @@ namespace AspNetCoreDemoApp.Services
         /// <param name="userData">The data to be stored.</param>
         /// <param name="options">Optional set of options to be used when creating the document.</param>
         /// <param name="cancellationToken">Optional task cancellation token.</param>
-        void Update(string userId, object userData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken));
+        void Update(string userId, User userData);
 
         /// <summary>
         /// Finds all the users.
