@@ -28,14 +28,24 @@ namespace AspNetCoreDemoApp.Services
             firestoreDb.Collection(collectionId).Document(documentId).SetAsync(documentData, options, cancellationToken).Wait();
         }
 
-        public IList<T> FindAll<T>(string collectionId) where T : class, IFirestoreDocumentModel
+        public IList<DocumentModel> FindAll<DocumentModel>(string collectionId) where DocumentModel : class, IFirestoreDocumentModel
         {
-            return firestoreDb.Collection(collectionId).GetSnapshotAsync<T>();
+            return firestoreDb.Collection(collectionId).GetSnapshotAsync<DocumentModel>();
         }
 
-        public T FindById<T>(string collectionId, string documentId) where T : class, IFirestoreDocumentModel
+        public DocumentModel FindById<DocumentModel>(string collectionId, string documentId) where DocumentModel : class, IFirestoreDocumentModel
         {
-            return firestoreDb.Collection(collectionId).Document(documentId).GetSnapshotAsync<T>();
+            return firestoreDb.Collection(collectionId).Document(documentId).GetSnapshotAsync<DocumentModel>();
+        }
+
+        public IQuery Where(string collectionId, string field, QueryOperator queryOperator, string value)
+        {
+            return firestoreDb.Collection(collectionId).Where(field, queryOperator, value);
+        }
+
+        public IQuery OrderBy(string collectionId, string field, SortDirection sortDirection)
+        {
+            return firestoreDb.Collection(collectionId).OrderBy(field, sortDirection);
         }
     }
 }

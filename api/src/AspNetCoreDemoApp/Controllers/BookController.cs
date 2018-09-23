@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 using AspNetCoreDemoApp.Models;
 using AspNetCoreDemoApp.Services;
-using Microsoft.AspNetCore.Http.Extensions;
+using AspNetCoreDemoApp.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreDemoApp.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	public class BookController : ControllerBase
 	{	
 		private IBookService bookService;
@@ -22,8 +21,13 @@ namespace AspNetCoreDemoApp.Controllers
 		/// </summary>
 		/// <returns>A list of all <see href="Book">s available.</returns>
         [HttpGet]
-		public IEnumerable<Book> Get()
+		public IEnumerable<Book> Get([FromQuery] string sortKey, [FromQuery] SortDirection sortDirection)
 		{
+			if (sortKey != null)
+			{
+				return bookService.FindAll(sortKey, sortDirection);
+			}
+
 			return bookService.FindAll();
 		}
 

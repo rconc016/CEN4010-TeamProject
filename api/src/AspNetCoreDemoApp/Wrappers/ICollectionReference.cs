@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreDemoApp.Models;
+using AspNetCoreDemoApp.Utils;
 using Google.Cloud.Firestore;
 
 namespace AspNetCoreDemoApp.Wrappers
@@ -29,5 +30,24 @@ namespace AspNetCoreDemoApp.Wrappers
         /// </summary>
         /// <typeparam name="DocumentModel">Object which must implement <see cref="IFirestoreDocumentModel" /></typeparam>
         IList<DocumentModel> GetSnapshotAsync<DocumentModel>() where DocumentModel : class, IFirestoreDocumentModel;
+
+        /// <summary>
+        /// Performs a selection query on all the documents
+        /// inside this collection.
+        /// </summary>
+        /// <param name="field">The name of the field to select by.</param>
+        /// <param name="queryOperator">The type of comparison to perform.</param>
+        /// <param name="value">The value to compare the field to.</param>
+        /// <returns>The query object ready to execute.</returns>
+        IQuery Where(string field, QueryOperator queryOperator, string value);
+
+        /// <summary>
+        /// Performs a sorting operation on all the documents
+        /// inside this collection.
+        /// </summary>
+        /// <param name="field">The name of the field to sort by.</param>
+        /// <param name="sortDirection">The direction of the sorting operation.</param>
+        /// <returns>The query object ready to execute.</returns>
+        IQuery OrderBy(string field, SortDirection sortDirection);
     }
 }

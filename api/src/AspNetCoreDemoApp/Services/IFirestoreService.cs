@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using AspNetCoreDemoApp.Models;
+using AspNetCoreDemoApp.Utils;
+using AspNetCoreDemoApp.Wrappers;
 using Google.Cloud.Firestore;
 
 namespace AspNetCoreDemoApp.Services
@@ -40,5 +42,26 @@ namespace AspNetCoreDemoApp.Services
         /// <param name="collectionId">The ID of the collection to look into.</param>
         /// <param name="documentId">The ID of the document to look for.</param>
         DocumentModel FindById<DocumentModel>(string collectionId, string documentId) where DocumentModel : class, IFirestoreDocumentModel;
+
+        /// <summary>
+        /// Performs a selection query on all the documents
+        /// inside the given collection.
+        /// </summary>
+        /// <param name="collectionId">The ID of the collection to query.</param>
+        /// <param name="field">The name of the field to select by.</param>
+        /// <param name="queryOperator">The type of comparison to perform.</param>
+        /// <param name="value">The value to compare the field to.</param>
+        /// <returns>The query object ready to execute.</returns>
+        IQuery Where(string collectionId, string field, QueryOperator queryOperator, string value);
+
+        /// <summary>
+        /// Performs a sorting operation on all the documents
+        /// inside the given collection.
+        /// </summary>
+        /// <param name="collectionId">The ID of the collection to query.</param>
+        /// <param name="field">The name of the field to sort by.</param>
+        /// <param name="sortDirection">The direction of the sorting operation.</param>
+        /// <returns>The query object ready to execute.</returns>
+        IQuery OrderBy(string collectionId, string field, SortDirection sortDirection);
     }
 }
