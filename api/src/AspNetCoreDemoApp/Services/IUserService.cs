@@ -7,13 +7,13 @@ namespace AspNetCoreDemoApp.Services
 {
     public interface IUserService
     {
+        void Create(string userId, User userData);
+
         /// <summary>
         /// Updates an existing user in the storage service.
         /// </summary>
         /// <param name="userId">The ID of the user being updated.</param>
         /// <param name="userData">The data to be stored.</param>
-        /// <param name="options">Optional set of options to be used when creating the document.</param>
-        /// <param name="cancellationToken">Optional task cancellation token.</param>
         void Update(string userId, User userData);
 
         /// <summary>

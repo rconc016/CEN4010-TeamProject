@@ -20,6 +20,11 @@ namespace AspNetCoreDemoApp.Services
             this.firestoreService = firestoreService;
         }
 
+        public void Create(string userId, User userData)
+        {
+            firestoreService.Create(CollectionId, userId, userData);
+        }
+
         public void Update(string userId, User userData)
         {
             firestoreService.Update(CollectionId, userId, userData);
