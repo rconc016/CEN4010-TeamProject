@@ -16,6 +16,7 @@ namespace AspNetCoreDemoApp
                 .AddTransient<IFirestoreDb, FirestoreDbWrapper>()
                 .AddScoped<IFirestoreService, FirestoreService>()
                 .AddScoped<IBookService, BookService>()
+                .AddScoped<IUserService, UserService>()
                 .AddMvcCore()
                 .AddCors()
                 .AddJsonFormatters();
