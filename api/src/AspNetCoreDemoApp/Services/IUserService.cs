@@ -7,6 +7,11 @@ namespace AspNetCoreDemoApp.Services
 {
     public interface IUserService
     {
+        /// <summary>
+        /// Creates an existing user in the storage service.
+        /// </summary>
+        /// <param name="userId">The ID of the user being updated.</param>
+        /// <param name="userData">The data to be stored.</param>
         void Create(string userId, User userData);
 
         /// <summary>
