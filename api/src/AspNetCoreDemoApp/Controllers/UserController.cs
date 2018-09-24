@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using AspNetCoreDemoApp.Models;
 using AspNetCoreDemoApp.Services;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreDemoApp.Controllers
@@ -42,6 +40,26 @@ namespace AspNetCoreDemoApp.Controllers
             }
 
             return user;
+        }
+
+        [HttpPut("{userId}")]
+        public ActionResult Put(string userId, [FromBody]User userData)
+        {
+            //string userId = userData.Id;
+            User user = userService.FindById(userId);
+            if (user == null)
+            {
+                userService.Create(userId, userData);
+                
+            }
+            else
+            {
+                userService.Update(userId, userData);
+
+            }
+
+            return Ok();
+
         }
     }
 }
