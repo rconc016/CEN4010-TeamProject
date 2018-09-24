@@ -1,10 +1,12 @@
+using Google.Cloud.Firestore;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using System;
 
 namespace AspNetCoreDemoApp
 {
     public class Program
-    {
+    { 
         public static void Main(string[] args) =>
             CreateWebHostBuilder(args).Build().Run();
 

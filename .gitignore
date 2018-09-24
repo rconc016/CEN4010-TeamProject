@@ -47,3 +47,4 @@ web/e2e/*.map
 # System Files
 .DS_Store
 Thumbs.db
+/api/src/AspNetCoreDemoApp/Properties/launchSettings.json
