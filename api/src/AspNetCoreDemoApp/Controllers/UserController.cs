@@ -45,7 +45,6 @@ namespace AspNetCoreDemoApp.Controllers
         [HttpPut("{userId}")]
         public ActionResult Put(string userId, [FromBody]User userData)
         {
-            //string userId = userData.Id;
             User user = userService.FindById(userId);
             if (user == null)
             {
