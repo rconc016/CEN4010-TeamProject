@@ -13,10 +13,11 @@ namespace AspNetCoreDemoApp.Services
         /// Creates a new document in the Firestore database.
         /// </summary>
         /// <param name="collectionId">The ID of the parent collection.</param>
+        /// <param name="documentId">The id of the document being created</param>
         /// <param name="documentData">The data to be stored.</param>
         /// <param name="options">Optional set of options to be used when creating the document.</param>
         /// <param name="cancellationToken">Optional task cancellation token.</param>
-        void Create(string collectionId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken));
+        void Create(string collectionId, string documentId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Updates an existing document in the Firestore database.

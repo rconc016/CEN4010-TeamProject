@@ -18,9 +18,9 @@ namespace AspNetCoreDemoApp.Services
             this.firestoreDb.Create(FirestoreConfig.ProjectId);
         }
 
-        public void Create(string collectionId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public void Create(string collectionId, string documentId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            firestoreDb.Collection(collectionId).Document().SetAsync(documentData, options, cancellationToken).Wait();
+            firestoreDb.Collection(collectionId).Document(documentId).SetAsync(documentData, options, cancellationToken).Wait();
         }
 
         public void Update(string collectionId, string documentId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
