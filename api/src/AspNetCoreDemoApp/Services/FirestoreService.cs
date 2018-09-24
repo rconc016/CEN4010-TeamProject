@@ -23,7 +23,7 @@ namespace AspNetCoreDemoApp.Services
             firestoreDb.Collection(collectionId).Document().SetAsync(documentData, options, cancellationToken).Wait();
         }
 
-        public void Create(string collectionId, string documentId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public void CreateWithId(string collectionId, string documentId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             firestoreDb.Collection(collectionId).Document(documentId).SetAsync(documentData, options, cancellationToken).Wait();
         }
@@ -43,7 +43,7 @@ namespace AspNetCoreDemoApp.Services
             return firestoreDb.Collection(collectionId).Document(documentId).GetSnapshotAsync<DocumentModel>();
         }
 
-        public IQuery Where(string collectionId, string field, QueryOperator queryOperator, string value)
+        public IQuery Where(string collectionId, string field, QueryOperator queryOperator, object value)
         {
             return firestoreDb.Collection(collectionId).Where(field, queryOperator, value);
         }

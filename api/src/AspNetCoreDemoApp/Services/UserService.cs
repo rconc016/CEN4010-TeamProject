@@ -22,7 +22,7 @@ namespace AspNetCoreDemoApp.Services
 
         public void Create(string userId, User userData)
         {
-            firestoreService.Create(CollectionId, userId, userData);
+            firestoreService.CreateWithId(CollectionId, userId, userData);
         }
 
         public void Update(string userId, User userData)

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreDemoApp.Models;
+using AspNetCoreDemoApp.Services;
 using AspNetCoreDemoApp.Utils;
 using Google.Cloud.Firestore;
 
@@ -9,35 +10,53 @@ namespace AspNetCoreDemoApp.Wrappers
 {
     public class FirestoreQuery : IQuery
     {
-        public Query query;
+        private CollectionReference collection;
+        private IList<FilterCommand> filterCommands;
+        private IList<Query> queries;
 
-        public FirestoreQuery(Query query)
+        public FirestoreQuery(CollectionReference collection)
         {
-            this.query = query;
+            this.collection = collection;
+            filterCommands = new List<FilterCommand>();
+            queries = new List<Query>();
         }
 
-        public IQuery Where(string field, QueryOperator queryOperator, string value)
+        public IQuery Where(string field, QueryOperator queryOperator, object value)
         {
             switch (queryOperator)
             {
                 case QueryOperator.Equal:
-                    query = query.WhereEqualTo(field, value);
+                    queries.Add(collection.WhereEqualTo(field, value));
                     break;
 
                 case QueryOperator.LessThan:
-                    query = query.WhereLessThan(field, value);
+                    queries.Add(collection.WhereLessThan(field, value));
                     break;
 
                 case QueryOperator.GreaterThan:
-                    query = query.WhereGreaterThan(field, value);
+                    queries.Add(collection.WhereGreaterThan(field, value));
                     break;
 
                 case QueryOperator.LessThanOrEqualTo:
-                    query = query.WhereLessThanOrEqualTo(field, value);
+                    queries.Add(collection.WhereLessThanOrEqualTo(field, value));
                     break;
 
                 case QueryOperator.GreaterThanOrEqualTo:
-                    query = query.WhereGreaterThanOrEqualTo(field, value);
+                    queries.Add(collection.WhereGreaterThanOrEqualTo(field, value));
+                    break;
+
+                case QueryOperator.Contains:
+                    // Because Firestore does not support this query operation
+                    // we need to include this sorting query to retrieve the list
+                    // of values to be filtered
+                    OrderBy(field, SortDirection.Asc);
+
+                    filterCommands.Add(new FilterCommand
+                    {
+                        FilterKey = field,
+                        Operator = queryOperator,
+                        FilterValue = value
+                    });
                     break;
 
                 default:
@@ -52,11 +71,11 @@ namespace AspNetCoreDemoApp.Wrappers
             switch (sortDirection)
             {
                 case SortDirection.Asc:
-                    query = query.OrderBy(field);
+                    queries.Add(collection.OrderBy(field));
                     break;
 
                 case SortDirection.Desc:
-                    query = query.OrderByDescending(field);
+                    queries.Add(collection.OrderByDescending(field));
                     break;
 
                 default:
@@ -69,16 +88,62 @@ namespace AspNetCoreDemoApp.Wrappers
         public IList<DocumentModel> Execute<DocumentModel>() where DocumentModel : class, IFirestoreDocumentModel
         {
             IList<DocumentModel> items = new List<DocumentModel>();
+            IList<DocumentSnapshot> result = null;
 
-            QuerySnapshot snapshot = query.GetSnapshotAsync().Result;
-            foreach(DocumentSnapshot documentSnapshot in snapshot.Documents)
+            // Firestore does not currently support performing multiple
+            // inequality filters on different properties for the same query
+            // As a workaround, we execute each query separately and then
+            // intersect the results
+            foreach (Query query in queries)
             {
-                DocumentModel item = documentSnapshot.ConvertTo<DocumentModel>();
-                item.Id = documentSnapshot.Id;
-                items.Add(item);
+                QuerySnapshot querySnapshot = query.GetSnapshotAsync().Result;
+                IList<DocumentSnapshot> documentSnapshots = new List<DocumentSnapshot>(querySnapshot.Documents);
+
+                if (result == null)
+                {
+                    result = documentSnapshots;
+                }
+                else
+                {
+                    result = ListUtils.IntersectWith(result, documentSnapshots);
+                }
+            }
+
+            foreach(DocumentSnapshot documentSnapshot in result)
+            {
+                if (ShouldInclude(documentSnapshot))
+                {
+                    DocumentModel item = documentSnapshot.ConvertTo<DocumentModel>();
+                    item.Id = documentSnapshot.Id;
+                    items.Add(item);
+                }
             }
 
             return items;
+        }
+
+        /// <summary>
+        /// Decides if the given snapshot should be including in
+        /// the query's final result based on the "Contains" filters.
+        /// Note: Firestore queries do not currently support this
+        /// type of filtering.
+        /// </summary>
+        /// <param name="snapshot"></param>
+        /// <returns></returns>
+        private bool ShouldInclude(DocumentSnapshot snapshot)
+        {
+            foreach (FilterCommand command in filterCommands)
+            {
+                string snapshotValue = snapshot.GetValue<string>(command.FilterKey).Trim().ToLower();
+                string filterValue = ((string) command.FilterValue).Trim().ToLower();
+
+                if (!snapshotValue.Contains(filterValue))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

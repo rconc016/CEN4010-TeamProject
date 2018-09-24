@@ -39,16 +39,13 @@ namespace AspNetCoreDemoApp.Controllers
             if (user == null)
             {
                 userService.Create(userId, userData);
-                
             }
             else
             {
                 userService.Update(userId, userData);
-
             }
 
             return Ok();
-
         }
     }
 }
