@@ -16,16 +16,6 @@ namespace AspNetCoreDemoApp.Controllers
         }
 
         /// <summary>
-		/// GET endpoint to retrieve the list of all the users.
-		/// </summary>
-		/// <returns>A list of all <see href="User">s available.</returns>
-        [HttpGet]
-        public IEnumerable<User> Get()
-        {
-            return userService.FindAll();
-        }
-
-        /// <summary>
         /// GET endpoint to retrieve a single user.
         /// </summary>
         /// <param name="userId"></param>
