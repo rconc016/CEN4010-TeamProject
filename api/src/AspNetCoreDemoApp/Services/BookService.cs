@@ -28,7 +28,7 @@ namespace AspNetCoreDemoApp.Services
             return firestoreService.FindAll<Book>(CollectionId);
         }
 
-        public IList<Book> FindAll(SortCommand sortCommand = null, IList<FilterCommand> filterCommands = null)        
+        public IList<Book> FindAll(SortCommand sortCommand = null, IList<FilterCommand> filterCommands = null, PageCommand pageCommand = null)        
         {
             IQuery query = null;
 
@@ -40,6 +40,11 @@ namespace AspNetCoreDemoApp.Services
             if (!ListUtils.IsListNullOrEmpty(filterCommands))
             {
                 query = ApplyFilterCommands(filterCommands, query);
+            }
+
+            if (pageCommand?.Limit > 0 || pageCommand?.Offset > 0)
+            {
+                query = ApplyPageCommand(pageCommand, query);
             }
 
             if (query != null)
@@ -55,18 +60,36 @@ namespace AspNetCoreDemoApp.Services
             return firestoreService.FindById<Book>(CollectionId, bookId);
         }
 
+        /// <summary>
+        /// Creates a sorting query.
+        /// </summary>
+        /// <param name="sortCommand">The sort command to use.</param>
+        /// <param name="query">Optional query to append to.</param>
+        /// <returns>A query with the sorting command applied.</returns>
         private IQuery ApplySortCommand(SortCommand sortCommand, IQuery query = null)
         {
             return (query == null) ? firestoreService.OrderBy(CollectionId, sortCommand.SortKey, sortCommand.SortBy) 
             : query.OrderBy(sortCommand.SortKey, sortCommand.SortBy);
         }
 
+        /// <summary>
+        /// Creates a filter query.
+        /// </summary>
+        /// <param name="filterCommand">The filter command to use.</param>
+        /// <param name="query">Optional query to append to.</param>
+        /// <returns>A query with the filtering command applied.</returns>
         private IQuery ApplyFilterCommand(FilterCommand filterCommand, IQuery query = null)
         {
             return (query == null) ? firestoreService.Where(CollectionId, filterCommand.FilterKey, filterCommand.Operator, filterCommand.FilterValue) 
             : query.Where(filterCommand.FilterKey, filterCommand.Operator, filterCommand.FilterValue);
         }
 
+        /// <summary>
+        /// Creates a filtering query from multiple filter commands.
+        /// </summary>
+        /// <param name="filterCommands">The filter commands to use.</param>
+        /// <param name="query">Optional query to append to.</param>
+        /// <returns>A query with all the filtering commands applied.</returns>
         private IQuery ApplyFilterCommands(IList<FilterCommand> filterCommands, IQuery query = null)
         {
             foreach (FilterCommand command in filterCommands)
@@ -75,6 +98,18 @@ namespace AspNetCoreDemoApp.Services
             }
 
             return query;
+        }
+
+        /// <summary>
+        /// Creates a paging query.
+        /// </summary>
+        /// <param name="pageCommand">The page command to use.</param>
+        /// <param name="query">Optional query to append to.</param>
+        /// <returns>A query with the paging command applied.</returns>
+        private IQuery ApplyPageCommand(PageCommand pageCommand, IQuery query = null)
+        {
+            return (query == null) ? firestoreService.Limit(CollectionId, pageCommand.Limit).Offset(pageCommand.Offset)
+            : query.Limit(pageCommand.Limit).Offset(pageCommand.Offset);
         }
 
         public IList<FilterCommand> GetFilterCommands(BookFilterCommand command)

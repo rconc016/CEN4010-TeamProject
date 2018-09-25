@@ -24,6 +24,22 @@ namespace AspNetCoreDemoApp.Wrappers
         IQuery OrderBy(string field, SortDirection sortDirection);
 
         /// <summary>
+        /// Limits the resulting list of documents
+        /// after executing the query.
+        /// </summary>
+        /// <param name="limit">The amount of results to return.</param>
+        /// <returns>The query object ready to execute.</returns>
+        IQuery Limit(int limit);
+
+        /// <summary>
+        /// Skips over the specified amount of results
+        /// after executing the query.
+        /// </summary>
+        /// <param name="offset">The amount of results to skip.</param>
+        /// <returns>The query object ready to execute.</returns>
+        IQuery Offset(int offset);
+
+        /// <summary>
         /// Executes the query and converts the result to
         /// the specified type.
         /// </summary>

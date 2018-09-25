@@ -73,5 +73,23 @@ namespace AspNetCoreDemoApp.Services
         /// <param name="sortDirection">The direction of the sorting operation.</param>
         /// <returns>The query object ready to execute.</returns>
         IQuery OrderBy(string collectionId, string field, SortDirection sortDirection);
+
+        /// <summary>
+        /// Limits the resulting list of documents
+        /// after executing the query.
+        /// </summary>
+        /// <param name="collectionId">The ID of the collection to query.</param>
+        /// <param name="limit">The amount of results to return.</param>
+        /// <returns>The query object ready to execute.</returns>
+        IQuery Limit(string collectionId, int limit);
+
+        /// <summary>
+        /// Skips over the specified amount of results
+        /// after executing the query.
+        /// </summary>
+        /// <param name="collectionId">The ID of the collection to query.</param>
+        /// <param name="offset">The amount of results to skip.</param>
+        /// <returns>The query object ready to execute.</returns>
+        IQuery Offset(string collectionId, int offset);
     }
 }

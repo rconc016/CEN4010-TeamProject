@@ -25,15 +25,28 @@ namespace AspNetCoreDemoApp.Binders
                     if (property.PropertyType == typeof(DateTime))
                     {
                         DateTime date = new DateTime();
-                        DateTime.TryParse((string) result.FirstValue, out date);
-                        property.SetValue(obj, date.ToUniversalTime());
+                        if (DateTime.TryParse((string) result.FirstValue, out date))
+                        {
+                            property.SetValue(obj, date.ToUniversalTime());
+                        }
                     }
 
                     else if (property.PropertyType == typeof(SortDirection))
                     {
                         object direction = SortDirection.Asc;
-                        Enum.TryParse(typeof(SortDirection), (string) result.FirstValue, true, out direction);
-                        property.SetValue(obj, direction);
+                        if (Enum.TryParse(typeof(SortDirection), (string) result.FirstValue, true, out direction))
+                        {
+                            property.SetValue(obj, direction);
+                        }
+                    }
+
+                    else if (property.PropertyType == typeof(Int32))
+                    {
+                        int value = 0;
+                        if (Int32.TryParse(result.FirstValue, out value))
+                        {
+                            property.SetValue(obj, value);
+                        }
                     }
 
                     else
