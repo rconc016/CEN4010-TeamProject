@@ -19,22 +19,19 @@ namespace AspNetCoreDemoApp.Controllers
 		/// <summary>
 		/// GET endpoint to retrieve the list of all the books.
 		/// </summary>
-		/// <returns>A list of all <see href="Book">s available.</returns>
+		/// <param name="sortCommand">The sorting key and order to use.</param>
+		/// <param name="filterCommand">The book property filters to apply.</param>
+		/// <returns>A list of all <see href="Book">s available after filtering and sorting have been applied.</returns>
         [HttpGet]
-		public IEnumerable<Book> Get([FromQuery] string sortKey, [FromQuery] SortDirection sortDirection)
+		public IEnumerable<Book> Get(SortCommand sortCommand, BookFilterCommand filterCommand)
 		{
-			if (sortKey != null)
-			{
-				return bookService.FindAll(sortKey, sortDirection);
-			}
-
-			return bookService.FindAll();
+			return bookService.FindAll(sortCommand, bookService.GetFilterCommands(filterCommand));
 		}
 
 		/// <summary>
 		/// GET endpoint to retrieve a single book.
 		/// </summary>
-		/// <param name="bookId"></param>
+		/// <param name="bookId">The ID of the book to look for.</param>
 		/// <returns>The book with the corresponding ID.</returns>
 		[HttpGet("{bookId}")]
 		public ActionResult<Book> Get(string bookId)

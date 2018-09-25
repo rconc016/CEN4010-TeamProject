@@ -42,58 +42,14 @@ namespace AspNetCoreDemoApp.Wrappers
             return items;
         }
 
-        public IQuery Where(string field, QueryOperator queryOperator, string value)
+        public IQuery Where(string field, QueryOperator queryOperator, object value)
         {
-            Query query;
-
-            switch (queryOperator)
-            {
-                case QueryOperator.Equal:
-                    query = collectionRef.WhereEqualTo(field, value);
-                    break;
-
-                case QueryOperator.LessThan:
-                    query = collectionRef.WhereLessThan(field, value);
-                    break;
-
-                case QueryOperator.GreaterThan:
-                    query = collectionRef.WhereGreaterThan(field, value);
-                    break;
-
-                case QueryOperator.LessThanOrEqualTo:
-                    query = collectionRef.WhereLessThanOrEqualTo(field, value);
-                    break;
-
-                case QueryOperator.GreaterThanOrEqualTo:
-                    query = collectionRef.WhereGreaterThanOrEqualTo(field, value);
-                    break;
-
-                default:
-                    throw new System.ArgumentException($"Query operator not found", queryOperator.ToString());
-            }
-
-            return new FirestoreQuery(query);
+            return new FirestoreQuery(collectionRef).Where(field, queryOperator, value);
         }
 
         public IQuery OrderBy(string field, SortDirection sortDirection)
         {
-            Query query;
-
-            switch (sortDirection)
-            {
-                case SortDirection.Asc:
-                    query = collectionRef.OrderBy(field);
-                    break;
-
-                case SortDirection.Desc:
-                    query = collectionRef.OrderByDescending(field);
-                    break;
-
-                default:
-                    throw new System.ArgumentException($"Sort direction not found", sortDirection.ToString());
-            }
-
-            return new FirestoreQuery(query);
+            return new FirestoreQuery(collectionRef).OrderBy(field, sortDirection);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AspNetCoreDemoApp.Services
     public interface IFirestoreService
     {
         /// <summary>
-        /// Creates a new document with auto-generated Id in the Firestore database.
+        /// Creates a new document with auto-generated ID in the Firestore database.
         /// </summary>
         /// <param name="collectionId">The ID of the parent collection.</param>
         /// <param name="documentData">The data to be stored.</param>
@@ -22,12 +22,11 @@ namespace AspNetCoreDemoApp.Services
         /// Creates a new document in the Firestore database.
         /// </summary>
         /// <param name="collectionId">The ID of the parent collection.</param>
-        /// <param name="documentId">The id of the document being created</param>
+        /// <param name="documentId">The ID of the document being created.</param>
         /// <param name="documentData">The data to be stored.</param>
         /// <param name="options">Optional set of options to be used when creating the document.</param>
         /// <param name="cancellationToken">Optional task cancellation token.</param>
-        void Create(string collectionId, string documentId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        void CreateWithId(string collectionId, string documentId, object documentData, SetOptions options = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Updates an existing document in the Firestore database.
@@ -63,7 +62,7 @@ namespace AspNetCoreDemoApp.Services
         /// <param name="queryOperator">The type of comparison to perform.</param>
         /// <param name="value">The value to compare the field to.</param>
         /// <returns>The query object ready to execute.</returns>
-        IQuery Where(string collectionId, string field, QueryOperator queryOperator, string value);
+        IQuery Where(string collectionId, string field, QueryOperator queryOperator, object value);
 
         /// <summary>
         /// Performs a sorting operation on all the documents

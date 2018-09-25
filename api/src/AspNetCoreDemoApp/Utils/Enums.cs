@@ -12,6 +12,7 @@ namespace AspNetCoreDemoApp.Utils
         LessThan,
         GreaterThan,
         LessThanOrEqualTo,
-        GreaterThanOrEqualTo
+        GreaterThanOrEqualTo,
+        Contains
     }
 }

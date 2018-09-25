@@ -39,7 +39,7 @@ namespace AspNetCoreDemoApp.Wrappers
         /// <param name="queryOperator">The type of comparison to perform.</param>
         /// <param name="value">The value to compare the field to.</param>
         /// <returns>The query object ready to execute.</returns>
-        IQuery Where(string field, QueryOperator queryOperator, string value);
+        IQuery Where(string field, QueryOperator queryOperator, object value);
 
         /// <summary>
         /// Performs a sorting operation on all the documents
