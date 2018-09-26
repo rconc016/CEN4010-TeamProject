@@ -63,7 +63,7 @@ namespace AspNetCoreDemoApp.Services
         {
             FilterCommand command = null;
 
-            if (!string.IsNullOrWhiteSpace(name) && value != null && value != DateTime.MinValue)
+            if (!string.IsNullOrWhiteSpace(name) && value != DateTime.MinValue)
             {
                 command = CreateGenericFilterCommand(name, queryOperator, value);
             }
