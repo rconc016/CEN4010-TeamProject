@@ -23,9 +23,9 @@ namespace AspNetCoreDemoApp.Controllers
 		/// <param name="filterCommand">The book property filters to apply.</param>
 		/// <returns>A list of all <see href="Book">s available after filtering and sorting have been applied.</returns>
         [HttpGet]
-		public IEnumerable<Book> Get(SortCommand sortCommand, BookFilterCommand filterCommand)
+		public IEnumerable<Book> Get(SortCommand sortCommand, BookFilterCommand filterCommand, PageCommand pageCommand)
 		{
-			return bookService.FindAll(sortCommand, bookService.GetFilterCommands(filterCommand));
+			return bookService.FindAll(sortCommand, bookService.GetFilterCommands(filterCommand), pageCommand);
 		}
 
 		/// <summary>

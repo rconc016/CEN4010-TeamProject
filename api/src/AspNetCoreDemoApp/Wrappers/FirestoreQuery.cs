@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,8 +12,12 @@ namespace AspNetCoreDemoApp.Wrappers
     public class FirestoreQuery : IQuery
     {
         private CollectionReference collection;
+        
         private IList<FilterCommand> filterCommands;
+        
         private IList<Query> queries;
+
+        private PageCommand pageCommand;
 
         public FirestoreQuery(CollectionReference collection)
         {
@@ -85,9 +90,61 @@ namespace AspNetCoreDemoApp.Wrappers
             return this;
         }
 
+        public IQuery Limit(int limit)
+        {
+            if (pageCommand == null)
+            {
+                pageCommand = new PageCommand();
+            }
+
+            pageCommand.Limit = limit;
+            return this;
+        }
+
+        public IQuery Offset(int offset)
+        {
+            if (pageCommand == null)
+            {
+                pageCommand = new PageCommand();
+            }
+
+            pageCommand.Offset = offset;
+            return this;
+        }
+
         public IList<DocumentModel> Execute<DocumentModel>() where DocumentModel : class, IFirestoreDocumentModel
         {
             IList<DocumentModel> items = new List<DocumentModel>();
+            int documentCounter = 0;
+            int documentOffsetCounter = 0;
+
+            IList<DocumentSnapshot> result = ExecuteQueries();
+            foreach(DocumentSnapshot documentSnapshot in result)
+            {
+                if (ShouldInclude(documentSnapshot))
+                {
+                    if (pageCommand == null)
+                    {
+                        AddConvertedDocument(items, documentSnapshot);
+                    }
+
+                    else if (pageCommand.Offset <= 0 || ++documentOffsetCounter > pageCommand.Offset)
+                    {
+                        AddConvertedDocument(items, documentSnapshot);
+
+                        if (pageCommand.Limit > 0 && ++documentCounter > pageCommand.Limit - 1)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return items;
+        }
+
+        private IList<DocumentSnapshot> ExecuteQueries()
+        {
             IList<DocumentSnapshot> result = null;
 
             // Firestore does not currently support performing multiple
@@ -109,17 +166,12 @@ namespace AspNetCoreDemoApp.Wrappers
                 }
             }
 
-            foreach(DocumentSnapshot documentSnapshot in result)
+            if (result == null)
             {
-                if (ShouldInclude(documentSnapshot))
-                {
-                    DocumentModel item = documentSnapshot.ConvertTo<DocumentModel>();
-                    item.Id = documentSnapshot.Id;
-                    items.Add(item);
-                }
+                result = new List<DocumentSnapshot>(collection.GetSnapshotAsync().Result.Documents);
             }
 
-            return items;
+            return result;
         }
 
         /// <summary>
@@ -144,6 +196,20 @@ namespace AspNetCoreDemoApp.Wrappers
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Converts the given document and adds it
+        /// to the given list of items.
+        /// </summary>
+        /// <typeparam name="DocumentModel"></typeparam>
+        /// <param name="items">The list of items to append to.</param>
+        /// /// <param name="snapshot">The document to convert and append.</param>
+        private void AddConvertedDocument<DocumentModel>(IList<DocumentModel> items, DocumentSnapshot snapshot) where DocumentModel : class, IFirestoreDocumentModel
+        {
+            DocumentModel item = snapshot.ConvertTo<DocumentModel>();
+            item.Id = snapshot.Id;
+            items.Add(item);
         }
     }
 }

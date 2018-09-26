@@ -51,5 +51,15 @@ namespace AspNetCoreDemoApp.Wrappers
         {
             return new FirestoreQuery(collectionRef).OrderBy(field, sortDirection);
         }
+
+        public IQuery Limit(int limit)
+        {
+            return new FirestoreQuery(collectionRef).Limit(limit);
+        }
+
+        public IQuery Offset(int offset)
+        {
+            return new FirestoreQuery(collectionRef).Offset(offset);
+        }
     }
 }

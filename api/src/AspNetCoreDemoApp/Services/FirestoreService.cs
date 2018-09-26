@@ -52,5 +52,15 @@ namespace AspNetCoreDemoApp.Services
         {
             return firestoreDb.Collection(collectionId).OrderBy(field, sortDirection);
         }
+
+        public IQuery Limit(string collectionId, int limit)
+        {
+            return firestoreDb.Collection(collectionId).Limit(limit);
+        }
+
+        public IQuery Offset(string collectionId, int offset)
+        {
+            return firestoreDb.Collection(collectionId).Offset(offset);
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace AspNetCoreDemoApp.Services
         /// <param name="sortCommand">The key and order to sort by.</param>
         /// <param name="filterCommands">The list of keys and values to filter by.</param>
         /// <returns></returns>
-        IList<Book> FindAll(SortCommand sortCommand, IList<FilterCommand> filterCommands);
+        IList<Book> FindAll(SortCommand sortCommand = null, IList<FilterCommand> filterCommands = null, PageCommand pageCommand = null);
 
         /// <summary>
         /// Finds the book with the given ID.
