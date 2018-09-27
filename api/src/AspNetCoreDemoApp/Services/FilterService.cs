@@ -17,6 +17,11 @@ namespace AspNetCoreDemoApp.Services
             AddFilterCommand(filterCommands, ConvertToFilterCommand(name, queryOperator, value));
         }
 
+        public void AddFilterCommand(IList<FilterCommand> filterCommands, string name, QueryOperator queryOperator, bool value)
+        {
+            AddFilterCommand(filterCommands, ConvertToFilterCommand(name, queryOperator, value));
+        }
+
         /// <summary>
         /// Adds the given filter command to the list of
         /// filters if it isn't null.
@@ -69,6 +74,19 @@ namespace AspNetCoreDemoApp.Services
             }
 
             return command;
+        }
+
+        /// <summary>
+        /// Validates the boolean value and
+        /// converts it to a generic filter command.
+        /// </summary>
+        /// <param name="name">The name of the property to filter.</param>
+        /// <param name="queryOperator">The type of filter to apply.</param>
+        /// <param name="value">The value of the filter to be used</param>
+        /// <returns>The generic filter command if the value is valid, null otherwise.</returns>
+        private FilterCommand ConvertToFilterCommand(string name, QueryOperator queryOperator, bool value)
+        {
+            return CreateGenericFilterCommand(name, queryOperator, value);
         }
 
         /// <summary>
