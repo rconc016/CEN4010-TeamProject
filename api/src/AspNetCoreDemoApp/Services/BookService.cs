@@ -122,6 +122,8 @@ namespace AspNetCoreDemoApp.Services
             filterService.AddFilterCommand(commands, "rating", QueryOperator.GreaterThanOrEqualTo, command.Rating);
             filterService.AddFilterCommand(commands, "releaseDate", QueryOperator.GreaterThanOrEqualTo, command.MinReleaseDate);
             filterService.AddFilterCommand(commands, "releaseDate", QueryOperator.LessThanOrEqualTo, command.MaxReleaseDate);
+            filterService.AddFilterCommand(commands, "genre", QueryOperator.Contains, command.Genre);
+            filterService.AddFilterCommand(commands, "topSeller", QueryOperator.Equal, command.TopSeller);
 
             return commands;
         }

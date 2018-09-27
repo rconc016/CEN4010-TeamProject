@@ -22,5 +22,9 @@ namespace AspNetCoreDemoApp.Models
         public DateTime MinReleaseDate { get; set; }
 
         public DateTime MaxReleaseDate { get; set; }
+
+        public string Genre { get; set; }
+
+        public bool TopSeller { get; set; }
     }
 }

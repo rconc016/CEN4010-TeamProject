@@ -49,6 +49,15 @@ namespace AspNetCoreDemoApp.Binders
                         }
                     }
 
+                    else if (property.PropertyType == typeof(Boolean))
+                    {
+                        bool value = false;
+                        if (Boolean.TryParse(result.FirstValue, out value))
+                        {
+                            property.SetValue(obj, value);
+                        }
+                    }
+
                     else
                     {
                         property.SetValue(obj, result.FirstValue);

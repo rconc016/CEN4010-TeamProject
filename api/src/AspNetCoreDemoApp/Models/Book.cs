@@ -24,5 +24,11 @@ namespace AspNetCoreDemoApp.Models
 
         [FirestoreProperty(name: "releaseDate")]
         public DateTime ReleaseDate { get; set; }
+
+        [FirestoreProperty(name: "genre")]
+        public string Genre { get; set; }
+
+        [FirestoreProperty(name: "topSeller")]
+        public bool TopSeller { get; set; }
     }
 }
