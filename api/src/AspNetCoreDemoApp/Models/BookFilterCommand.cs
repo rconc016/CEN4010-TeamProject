@@ -19,12 +19,12 @@ namespace AspNetCoreDemoApp.Models
 
         public string Rating { get; set; }
 
-        public DateTime MinReleaseDate { get; set; }
+        public DateTime? MinReleaseDate { get; set; }
 
-        public DateTime MaxReleaseDate { get; set; }
+        public DateTime? MaxReleaseDate { get; set; }
 
         public string Genre { get; set; }
 
-        public bool TopSeller { get; set; }
+        public bool? TopSeller { get; set; }
     }
 }

@@ -12,12 +12,12 @@ namespace AspNetCoreDemoApp.Services
             AddFilterCommand(filterCommands, ConvertToFilterCommand(name, queryOperator, value));
         }
 
-        public void AddFilterCommand(IList<FilterCommand> filterCommands, string name, QueryOperator queryOperator, DateTime value)
+        public void AddFilterCommand(IList<FilterCommand> filterCommands, string name, QueryOperator queryOperator, DateTime? value)
         {
             AddFilterCommand(filterCommands, ConvertToFilterCommand(name, queryOperator, value));
         }
 
-        public void AddFilterCommand(IList<FilterCommand> filterCommands, string name, QueryOperator queryOperator, bool value)
+        public void AddFilterCommand(IList<FilterCommand> filterCommands, string name, QueryOperator queryOperator, bool? value)
         {
             AddFilterCommand(filterCommands, ConvertToFilterCommand(name, queryOperator, value));
         }
@@ -64,11 +64,11 @@ namespace AspNetCoreDemoApp.Services
         /// <param name="queryOperator">The type of filter to apply.</param>
         /// <param name="value">The value of the filter to be used</param>
         /// <returns>The generic filter command if the value is valid, null otherwise.</returns>
-        private FilterCommand ConvertToFilterCommand(string name, QueryOperator queryOperator, DateTime value)
+        private FilterCommand ConvertToFilterCommand(string name, QueryOperator queryOperator, DateTime? value)
         {
             FilterCommand command = null;
 
-            if (!string.IsNullOrWhiteSpace(name) && value != null && value != DateTime.MinValue)
+            if (!string.IsNullOrWhiteSpace(name) && value != null)
             {
                 command = CreateGenericFilterCommand(name, queryOperator, value);
             }
@@ -84,9 +84,16 @@ namespace AspNetCoreDemoApp.Services
         /// <param name="queryOperator">The type of filter to apply.</param>
         /// <param name="value">The value of the filter to be used</param>
         /// <returns>The generic filter command if the value is valid, null otherwise.</returns>
-        private FilterCommand ConvertToFilterCommand(string name, QueryOperator queryOperator, bool value)
+        private FilterCommand ConvertToFilterCommand(string name, QueryOperator queryOperator, bool? value)
         {
-            return CreateGenericFilterCommand(name, queryOperator, value);
+            FilterCommand command = null;
+
+            if (!string.IsNullOrWhiteSpace(name) && value != null)
+            {
+                command = CreateGenericFilterCommand(name, queryOperator, value);
+            }
+
+            return command;
         }
 
         /// <summary>

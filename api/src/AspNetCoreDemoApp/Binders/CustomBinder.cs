@@ -22,7 +22,7 @@ namespace AspNetCoreDemoApp.Binders
                 ValueProviderResult result = bindingContext.ValueProvider.GetValue(property.Name.ToLower());
                 if (result.FirstValue != null)
                 {
-                    if (property.PropertyType == typeof(DateTime))
+                    if (property.PropertyType == typeof(DateTime?))
                     {
                         DateTime date = new DateTime();
                         if (DateTime.TryParse((string) result.FirstValue, out date))
@@ -49,7 +49,7 @@ namespace AspNetCoreDemoApp.Binders
                         }
                     }
 
-                    else if (property.PropertyType == typeof(Boolean))
+                    else if (property.PropertyType == typeof(Boolean?))
                     {
                         bool value = false;
                         if (Boolean.TryParse(result.FirstValue, out value))
