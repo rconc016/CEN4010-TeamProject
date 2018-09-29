@@ -5,27 +5,31 @@ import { rootRouterConfig } from './app.routes';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
-import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
-import { RegisterComponent } from './register/register.component';
-import { UserResolver } from './user/user.resolver';
-import { AuthGuard } from './core/auth.guard';
-import { AuthService } from './core/auth.service';
-import { UserService } from './core/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { LoginComponent } from '../components/login/login.component';
+import { UserComponent } from '../components/user/user.component';
+import { RegisterComponent } from '../components/register/register.component';
+import { BookComponent } from '../components/book/book.component';
+import { environment } from '../environments/environment';
+import { AuthService } from '../components/core/auth.service';
+import { UserService } from '../components/core/user.service';
+import { UserResolver } from '../components/user/user.resolver';
+import { AuthGuard } from '../components/core/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     AngularFireModule.initializeApp(environment.firebase),
