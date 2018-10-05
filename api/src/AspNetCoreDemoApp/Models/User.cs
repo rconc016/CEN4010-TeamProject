@@ -8,6 +8,15 @@ namespace AspNetCoreDemoApp.Models
     {
         public string Id { get; set; }
 
+        [FirestoreProperty(name: "name")]
+        public string Name { get; set; }
+
+        [FirestoreProperty(name: "provider")]
+        public string Provider { get; set; }
+
+        [FirestoreProperty(name: "image")]
+        public string ImageUrl { get; set; }
+
         [FirestoreProperty(name: "firstName")]
         public string FirstName { get; set; }
 
