@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
+import { User } from 'firebase';
+import * as firebase from "firebase";
 
 @Component({
   selector: 'page-user',
@@ -12,12 +14,12 @@ import { FirebaseUserModel } from '../core/user.model';
   styleUrls: ['user.scss']
 })
 export class UserComponent implements OnInit{
-
-  user: FirebaseUserModel = new FirebaseUserModel();
+  user: FirebaseUserModel;
   profileForm: FormGroup;
 
+
   constructor(
-    public userService: UserService,
+    private userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
     private location : Location,
@@ -31,14 +33,18 @@ export class UserComponent implements OnInit{
       let data = routeData['data'];
       if (data) {
         this.user = data;
+        console.log(this.user);
         this.createForm(this.user.name);
       }
     })
+    
+    this.getUser();
+
   }
 
   createForm(name) {
     this.profileForm = this.fb.group({
-      name: [name, Validators.required ]
+      name: [name, Validators.required ],
     });
   }
 
@@ -56,5 +62,31 @@ export class UserComponent implements OnInit{
     }, (error) => {
       console.log("Logout error", error);
     });
+  }
+
+  getUser() {
+    let id;
+    firebase.auth().onAuthStateChanged((user) =>{id = user.uid});
+    this.userService.getUser(id)
+        .subscribe((data: FirebaseUserModel) => this.user = { 
+          billingAddress: data['billingAddress'],
+          email: data['email'],
+          fName: data['firstName'],
+          id: data['id'],
+          lName: data['lastName'],
+          nickname: data['nickname'],
+          shippingAddress : data['shippingAddress'],
+          provider: this.user.provider,
+          image: this.user.image,
+          name: this.user.name
+        });
+  }
+
+  updateUser(editUser:FirebaseUserModel) {
+    this.userService.updateUser(editUser)
+        .subscribe(res=> {
+          this.user = res;
+        })
+    
   }
 }
