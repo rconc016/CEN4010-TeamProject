@@ -30,5 +30,8 @@ namespace AspNetCoreDemoApp.Models
 
         [FirestoreProperty(name: "topSeller")]
         public bool TopSeller { get; set; }
+
+        [FirestoreProperty(name: "imageUrl")]
+        public string ImageUrl { get; set; }
     }
 }
