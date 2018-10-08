@@ -23,6 +23,7 @@ import { AuthGuard } from '../components/core/auth.guard';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BookResolver } from '../components/book/book.resolver';
 import { NavbarComponent } from '../components/navbar/navbar.component';
+import { BookDetailsComponent } from '../components/book.details/book.details.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
     UserComponent,
     RegisterComponent,
     BookComponent,
+    BookDetailsComponent,
     NavbarComponent,
   ],
   imports: [
@@ -43,7 +45,7 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
     AngularFireAuthModule,
     NgbModule,
     FormsModule,
-	MatGridListModule
+    MatGridListModule
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver],
   bootstrap: [AppComponent]
