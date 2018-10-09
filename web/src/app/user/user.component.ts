@@ -5,8 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
-import { User } from 'firebase';
-import * as firebase from "firebase";
 
 @Component({
   selector: 'page-user',
@@ -39,7 +37,6 @@ export class UserComponent implements OnInit{
     })
     
     this.getUser();
-
   }
 
   createForm(name) {
@@ -65,15 +62,13 @@ export class UserComponent implements OnInit{
   }
 
   getUser() {
-    let id;
-    firebase.auth().onAuthStateChanged((user) =>{id = user.uid});
-    this.userService.getUser(id)
+    this.userService.getUser(this.user.id)
         .subscribe((data: FirebaseUserModel) => this.user = { 
           billingAddress: data['billingAddress'],
           email: data['email'],
-          fName: data['firstName'],
+          firstName: data['firstName'],
           id: data['id'],
-          lName: data['lastName'],
+          lastName: data['lastName'],
           nickname: data['nickname'],
           shippingAddress : data['shippingAddress'],
           provider: this.user.provider,
@@ -82,11 +77,14 @@ export class UserComponent implements OnInit{
         });
   }
 
-  updateUser(editUser:FirebaseUserModel) {
-    this.userService.updateUser(editUser)
+  updateUser() {
+    this.userService.updateUser(this.user)
         .subscribe(res=> {
-          this.user = res;
+         console.log(res);
         })
     
   }
+
+  get diagnostic() { return JSON.stringify(this.user); }
+
 }
