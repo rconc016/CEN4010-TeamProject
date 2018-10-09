@@ -68,9 +68,9 @@ export class RegisterProfileComponent implements OnInit {
         .subscribe((data: FirebaseUserModel) => this.user = { 
           billingAddress: data['billingAddress'],
           email: data['email'],
-          fName: data['firstName'],
+          firstName: data['firstName'],
           id: data['id'],
-          lName: data['lastName'],
+          lastName: data['lastName'],
           nickname: data['nickname'],
           shippingAddress : data['shippingAddress'],
           provider: this.user.provider,
