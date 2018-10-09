@@ -15,6 +15,7 @@ import { AuthGuard } from './core/auth.guard';
 import { AuthService } from './core/auth.service';
 import { UserService } from './core/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { RegisterProfileComponent } from './register-profile/register-profile.component';
@@ -31,6 +32,7 @@ import { RegisterProfileComponent } from './register-profile/register-profile.co
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
