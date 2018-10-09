@@ -4,8 +4,8 @@ export class FirebaseUserModel {
   image: string;
   name: string;
   provider: string;
-  fName: string;
-  lName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   id: string;
   billingAddress: string;
@@ -16,13 +16,15 @@ export class FirebaseUserModel {
     this.image = "";
     this.name = "";
     this.provider = "";
-    this.fName = '';
-    this.lName = '';
+    this.firstName = '';
+    this.lastName = '';
     this.email = '';
     this.nickname = '';
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+
         this.id = user.uid;
+        this.email = user.email;
       } else {
         this.id = '';
       }
