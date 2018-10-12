@@ -31,7 +31,6 @@ export class UserComponent implements OnInit{
       let data = routeData['data'];
       if (data) {
         this.user = data;
-        console.log(this.user);
         this.createForm(this.user.name);
       }
     })
@@ -78,6 +77,7 @@ export class UserComponent implements OnInit{
   }
 
   updateUser() {
+    this.user.name = this.user.firstName + " " + this.user.lastName;
     this.userService.updateUser(this.user)
         .subscribe(res=> {
          console.log(res);
