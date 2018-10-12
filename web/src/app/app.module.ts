@@ -18,15 +18,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
-import { RegisterProfileComponent } from './register-profile/register-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserComponent,
-    RegisterComponent,
-    RegisterProfileComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
