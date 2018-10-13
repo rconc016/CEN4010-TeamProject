@@ -6,6 +6,7 @@ import { UserComponent } from '../components/user/user.component';
 import { UserResolver } from '../components/user/user.resolver';
 import { BookComponent } from '../components/book/book.component';
 
+
 export const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
