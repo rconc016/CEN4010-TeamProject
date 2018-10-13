@@ -1,4 +1,4 @@
-<div *ngIf="!selected" class="container-fluid main-container">
+<div class="container-fluid main-container">
   <label>Filter: <input (keyup)="saveQuery($event)" /></label>
   <mat-grid-list cols="4" rowHeight="40rem">
     <mat-grid-tile *ngFor="let book of filterBooks(this.query); let i = index" [attr.data-index]="i">
