@@ -5,7 +5,7 @@ import { CommandService } from '../../common/services/command/command.service';
 import { SortCommand } from '../../common/models/sortcommand';
 import { BookFilterCommand } from '../../common/models/bookfiltercommand';
 import { PageCommand } from '../../common/models/pagecommand';
-import { BookInterface } from '../../components/book/book.interface';
+import { BookInterface } from '../../components/book.details/book.interface';
 
 @Injectable({
   providedIn: 'root'

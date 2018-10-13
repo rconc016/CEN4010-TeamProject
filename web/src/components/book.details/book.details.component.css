@@ -1,0 +1,70 @@
+/* .col-sm {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(86,61,124,.15);
+    border: 1px solid rgba(86,61,124,.2);
+} */
+
+.bg {
+    background-image: url("https://images-na.ssl-images-amazon.com/images/I/919-FLL37TL.jpg");
+    height: 30rem;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main-container {
+    padding: 5rem;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.image-container {
+    position: relative;
+}
+
+.book-image {
+    height: 50rem;
+}
+
+.top-seller {
+    width: 10rem;
+    transform: rotate(20deg);
+    position: absolute;
+    left: 22rem;
+    bottom: 41rem;
+}
+
+.return-button {
+    margin-left: 0.1rem;
+    margin-top: 2rem;
+}
+
+.field-title {
+    font-weight: bold;
+}
+
+.field-row {
+    margin-bottom: .5rem; 
+}
+
+.details-container {
+    margin-left: 0%;
+}
+
+.return-button-row {
+    margin-top: 3rem;
+}
+
+.details-panel {
+    width: 100%;
+}
+
+.details-panel-body {
+    padding-left: 3rem;
+}
+
+.buy-button {
+    width: 100%;
+}

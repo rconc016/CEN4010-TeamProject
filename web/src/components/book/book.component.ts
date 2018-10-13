@@ -2,8 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ActivatedRoute, RouterStateSnapshot} from "@angular/router";
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Book } from './book.model';
-import { BookInterface } from './book.interface';
+import { Book } from '../book.details/book.model';
+import { BookInterface } from '../book.details/book.interface';
 
 @Component({
   selector: 'app-book',
@@ -97,6 +97,7 @@ export class BookComponent implements OnInit {
 	} 
 	
   public selectBook(book: Book) {
+    this.router.navigate([`book/${book.id}`]);
   }
   
   public saveQuery(event: KeyboardEvent) {
