@@ -18,6 +18,7 @@ import { UserService } from '../components/core/user.service';
 import { UserResolver } from '../components/user/user.resolver';
 import { AuthGuard } from '../components/core/auth.guard';
 import { FormsModule } from '@angular/forms';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    BookComponent
+    BookComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
