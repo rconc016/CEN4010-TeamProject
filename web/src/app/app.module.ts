@@ -5,8 +5,10 @@ import { rootRouterConfig } from './app.routes';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/login/login.component';
@@ -18,6 +20,9 @@ import { AuthService } from '../components/core/auth.service';
 import { UserService } from '../components/core/user.service';
 import { UserResolver } from '../components/user/user.resolver';
 import { AuthGuard } from '../components/core/auth.guard';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BookResolver } from '../components/book/book.resolver';
+import { NavbarComponent } from '../components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,8 @@ import { AuthGuard } from '../components/core/auth.guard';
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    BookComponent
+    BookComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,10 +39,13 @@ import { AuthGuard } from '../components/core/auth.guard';
     ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    NgbModule,
+    FormsModule,
+	MatGridListModule
   ],
-  providers: [AuthService, UserService, UserResolver, AuthGuard],
+  providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

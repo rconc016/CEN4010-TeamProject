@@ -1,4 +1,4 @@
-export interface Book {
+export interface BookInterface {
     id: string;
     title: string;
     author: string;
@@ -7,4 +7,5 @@ export interface Book {
     releaseDate: Date;
     genre: string;
     topSeller: boolean;
+    imageUrl: string;
 }
