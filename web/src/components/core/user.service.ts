@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import { User } from 'firebase/app';
 import { FirebaseUserModel } from './user.model';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
