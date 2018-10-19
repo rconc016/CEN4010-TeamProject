@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
@@ -11,19 +11,18 @@ import { FirebaseUserModel } from '../core/user.model';
   templateUrl: 'user.component.html',
   styleUrls: ['user.scss']
 })
-export class UserComponent implements OnInit{
-
-  user: FirebaseUserModel = new FirebaseUserModel();
+export class UserComponent implements OnInit {
+  user: FirebaseUserModel;
   profileForm: FormGroup;
 
   constructor(
-    public userService: UserService,
+    private userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private location : Location,
     private fb: FormBuilder
   ) {
-
   }
 
   ngOnInit(): void {
@@ -34,27 +33,46 @@ export class UserComponent implements OnInit{
         this.createForm(this.user.name);
       }
     })
+    
+    this.getUser();
   }
 
   createForm(name) {
     this.profileForm = this.fb.group({
-      name: [name, Validators.required ]
+      name: [name, Validators.required ],
     });
-  }
-
-  save(value){
-    this.userService.updateCurrentUser(value)
-    .then(res => {
-      console.log(res);
-    }, err => console.log(err))
   }
 
   logout(){
     this.authService.doLogout()
     .then((res) => {
-      this.location.back();
+      this.router.navigate(['']);
     }, (error) => {
       console.log("Logout error", error);
     });
+  }
+
+  getUser() {
+    this.userService.getUser(this.user.id)
+        .subscribe((data: FirebaseUserModel) => this.user = { 
+          billingAddress: data['billingAddress'],
+          email: data['email'],
+          firstName: data['firstName'],
+          id: data['id'],
+          lastName: data['lastName'],
+          nickname: data['nickname'],
+          shippingAddress : data['shippingAddress'],
+          provider: this.user.provider,
+          image: this.user.image,
+          name: this.user.name
+        });
+  }
+
+  updateUser() {
+    this.user.name = `${this.user.firstName} ${this.user.lastName}`;
+    this.userService.updateUser(this.user)
+      .subscribe(res => {
+        this.router.navigate(['/book']);
+    })
   }
 }
