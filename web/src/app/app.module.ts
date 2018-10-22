@@ -18,7 +18,7 @@ import { UserService } from '../components/core/user.service';
 import { UserResolver } from '../components/user/user.resolver';
 import { AuthGuard } from '../components/core/auth.guard';
 import { FormsModule } from '@angular/forms';
-import { CartComponent } from './cart/cart.component';
+import { CartComponent } from '../components/cart/cart.component';
 
 @NgModule({
   declarations: [
