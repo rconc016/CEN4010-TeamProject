@@ -1,3 +1,31 @@
-<p>
-  book works!
-</p>
+<div class="container-fluid main-container">
+  <div class="row sort-row">
+    <div class="col"><label>Filter: <input (keyup)="saveQuery($event)" /></label></div>
+    <div class="col">
+      <div class="row pull-right">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Sort by: {{selectedSortingOption.name}}</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button *ngFor="let option of bookSortingOptions" class="dropdown-item" (click)="setSelectedSortingOption(option)">{{option.name}}</button>
+          </div>
+        </div>
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{selectedSortingDirection}}</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="dropdown-item" (click)="setAscSortingDirection()">Ascending</button>
+            <button class="dropdown-item" (click)="setDescSortingDirection()">Descending</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-grid-list cols="4" rowHeight="40rem">
+        <mat-grid-tile *ngFor="let book of filterBooks(this.query); let i = index" [attr.data-index]="i">
+          <img class="tile-image" src="{{book.imageUrl}}" (click)="selectBook(book)"/>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>

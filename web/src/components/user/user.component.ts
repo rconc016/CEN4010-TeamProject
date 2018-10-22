@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
@@ -11,7 +11,7 @@ import { FirebaseUserModel } from '../core/user.model';
   templateUrl: 'user.component.html',
   styleUrls: ['user.scss']
 })
-export class UserComponent implements OnInit{
+export class UserComponent implements OnInit {
   user: FirebaseUserModel;
   profileForm: FormGroup;
 
@@ -20,10 +20,10 @@ export class UserComponent implements OnInit{
     private userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private location : Location,
     private fb: FormBuilder
   ) {
-
   }
 
   ngOnInit(): void {
@@ -44,17 +44,10 @@ export class UserComponent implements OnInit{
     });
   }
 
-  save(value){
-    this.userService.updateCurrentUser(value)
-    .then(res => {
-      console.log(res);
-    }, err => console.log(err))
-  }
-
   logout(){
     this.authService.doLogout()
     .then((res) => {
-      this.location.back();
+      this.router.navigate(['']);
     }, (error) => {
       console.log("Logout error", error);
     });
@@ -77,14 +70,10 @@ export class UserComponent implements OnInit{
   }
 
   updateUser() {
-    this.user.name = this.user.firstName + " " + this.user.lastName;
+    this.user.name = `${this.user.firstName} ${this.user.lastName}`;
     this.userService.updateUser(this.user)
-        .subscribe(res=> {
-         console.log(res);
-        })
-    
+      .subscribe(res => {
+        this.router.navigate(['/book']);
+    })
   }
-
-  get diagnostic() { return JSON.stringify(this.user); }
-
 }

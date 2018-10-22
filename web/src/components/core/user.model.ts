@@ -13,9 +13,9 @@ export class FirebaseUserModel {
   nickname: string;
 
   constructor(){
-    this.image = "";
-    this.name = "";
-    this.provider = "";
+    this.image = '';
+    this.name = '';
+    this.provider = '';
     this.firstName = '';
     this.lastName = '';
     this.email = '';

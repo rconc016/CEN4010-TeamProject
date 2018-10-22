@@ -15,7 +15,7 @@ namespace AspNetCoreDemoApp.Models
         public string Provider { get; set; }
 
         [FirestoreProperty(name: "image")]
-        public string Image { get; set; }
+        public string ImageUrl { get; set; }
 
         [FirestoreProperty(name: "firstName")]
         public string FirstName { get; set; }

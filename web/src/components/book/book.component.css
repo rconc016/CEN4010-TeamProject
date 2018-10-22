@@ -1,0 +1,14 @@
+.main-container {
+    padding: 5rem;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.sort-row {
+    margin-bottom: 1rem;
+}
+
+.tile-image {
+    width: 60rem;
+    height: 40rem;
+}
