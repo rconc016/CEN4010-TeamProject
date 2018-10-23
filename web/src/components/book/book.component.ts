@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {ActivatedRoute, RouterStateSnapshot} from "@angular/router";
+import { Router } from "@angular/router";
+import { ActivatedRoute, RouterStateSnapshot } from "@angular/router";
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Book } from '../book.details/book.model';
 import { BookInterface } from '../book.details/book.interface';
@@ -8,6 +8,8 @@ import { BookService } from '../../services/book/book.service';
 import { BookSortingOption } from './booksortingoption.model';
 import { SortCommand } from '../../common/models/sortcommand';
 import { SortDirection } from '../../common/enums/sortdirection';
+import { ScrollEvent } from 'ngx-scroll-event';
+import { PageCommand } from '../../common/models/pagecommand';
 
 @Component({
   selector: 'app-book',
@@ -15,26 +17,42 @@ import { SortDirection } from '../../common/enums/sortdirection';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-  private useTestData = false;
+  public static readonly numberOfBooksPerPage = 8;
+
+  private useTestData: boolean;
+  private loading: boolean;
+  private offset: number;
     
   public searchForm: FormGroup;
-  public hasSearched = false;
-  public query = '';
-  public filterIndex = 999;    
+  public hasSearched: boolean;
+  public query: string;
+  public filterIndex: number;    
   public filteredBooks: Book[];  
   public books: Book[];
   public bookSortingOptions: BookSortingOption[];
   public selectedSortingOption: BookSortingOption;
-  public selectedSortingDirection: string;
+  public selectedSortingDirectionName: string;
+  public selectedSortingDirectionValue: SortDirection;
 
   public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private bookService: BookService) {
+    this.useTestData = false;
+
     this.bookSortingOptions = this.createSortingOptions();
     this.selectedSortingOption = this.bookSortingOptions[0];
-    this.selectedSortingDirection = 'Ascending';
+    this.selectedSortingDirectionName = 'Ascending';
+    this.selectedSortingDirectionValue = SortDirection.Asc;
     this.books = this.useTestData ? this.getTestData() : this.getData();
     this.createForm();
   }
   
+  public ngOnInit() {
+    this.loading = false;
+    this.offset = 0;
+    this.hasSearched = false;
+    this.query = '';
+    this.filterIndex = 999;
+  }
+
   public createForm() {
     this.searchForm = this.fb.group({
       bookQuery: ['', Validators.required ]
@@ -169,43 +187,67 @@ export class BookComponent implements OnInit {
    */
   public setSelectedSortingOption(option: BookSortingOption) {
     this.selectedSortingOption = option;
-    this.reloadBooks(this.selectedSortingOption.key, SortDirection.Asc);
+    this.offset = 0;
+    this.reloadBooks(this.selectedSortingOption.key, this.selectedSortingDirectionValue, this.offset, true);
   }
 
   /**
    * Reloads the list of books in ascending order.
    */
   public setAscSortingDirection() {
-    this.selectedSortingDirection = 'Ascending';
-    this.reloadBooks(this.selectedSortingOption.key, SortDirection.Asc);
+    this.selectedSortingDirectionName = 'Ascending';
+    this.selectedSortingDirectionValue = SortDirection.Asc;
+    this.offset = 0;
+    this.reloadBooks(this.selectedSortingOption.key, this.selectedSortingDirectionValue, this.offset, true);
   }
 
   /**
    * Reloads the list of books in descending order.
    */
   public setDescSortingDirection() {
-    this.selectedSortingDirection = 'Descending';
-    this.reloadBooks(this.selectedSortingOption.key, SortDirection.Desc);
+    this.selectedSortingDirectionName = 'Descending';
+    this.selectedSortingDirectionValue = SortDirection.Desc;
+    this.offset = 0;
+    this.reloadBooks(this.selectedSortingOption.key, this.selectedSortingDirectionValue, this.offset, true);
   }
 
   /**
    * Reloads the list of books with the given sorting key and direction.
    * @param sortKey The key of the field to sort on.
    * @param sortDirection The order to sort in.
+   * @param offset The number of the current page offset.
+   * @param clean If true, the current list of books will be replaced by the result, 
+   *              otherwise the result will be appended.
    */
-  private reloadBooks(sortKey: string, sortDirection: SortDirection) {
+  private reloadBooks(sortKey: string, sortDirection: SortDirection, offset: number, clean: boolean) {
     let sortCommand = new SortCommand();
     sortCommand.key = sortKey;
     sortCommand.sortBy = sortDirection;
 
+    let pageCommand = new PageCommand();
+    pageCommand.limit = BookComponent.numberOfBooksPerPage;
+    pageCommand.offset = BookComponent.numberOfBooksPerPage * offset;
+
     if (this.useTestData === false) {
-      this.bookService.findAll(sortCommand, null, null)
+      this.loading = true;
+
+      this.bookService.findAll(sortCommand, null, pageCommand)
         .subscribe((result: BookInterface[]) => {
-          this.books = result;
+          this.loading = false;
+          this.books = clean ? result : this.books.concat(result);
         });
     }
   }
 
-  public ngOnInit() {
+  /**
+   * Loads the next page of books.
+   * @param event The scrolling event triggered.
+   */
+  public loadAdditionalBooks(event: ScrollEvent) {
+    if (event.isReachingBottom && !this.loading) {
+      this.loading = true;
+      this.offset += 1;
+      this.reloadBooks(this.selectedSortingOption.key, this.selectedSortingDirectionValue, this.offset, false);
+    }
   }
 }

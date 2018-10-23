@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 import { BookInterface } from '../book.details/book.interface';
 import { SortCommand } from '../../common/models/sortcommand';
 import { SortDirection } from '../../common/enums/sortdirection';
+import { PageCommand } from '../../common/models/pagecommand';
+import { BookComponent } from './book.component';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BookResolver implements Resolve<BookInterface[]> {
-    private readonly sortKey: string;
+    private readonly sortKey = 'title';
 
     constructor(private bookService: BookService) {
     }
@@ -20,6 +22,9 @@ export class BookResolver implements Resolve<BookInterface[]> {
         sortCommand.key = this.sortKey;
         sortCommand.sortBy = SortDirection.Asc;
 
-        return this.bookService.findAll(sortCommand, null, null);
+        let pageCommand = new PageCommand();
+        pageCommand.limit = BookComponent.numberOfBooksPerPage;
+
+        return this.bookService.findAll(sortCommand, null, pageCommand);
     }
 }

@@ -29,15 +29,15 @@ export class BookService {
     var params = new HttpParams();
 
     if (sortCommand) {
-      params = this.commandService.convertSortToParams(sortCommand);
+      params = this.commandService.convertSortToParams(sortCommand, params);
     }
 
     if (filterCommand) {
-      params = this.commandService.convertBookFilterToParams(filterCommand);
+      params = this.commandService.convertBookFilterToParams(filterCommand, params);
     }
 
     if (pageCommand) {
-      params = this.commandService.convertPageToParams(pageCommand);
+      params = this.commandService.convertPageToParams(pageCommand, params);
     }
 
     let options = {
