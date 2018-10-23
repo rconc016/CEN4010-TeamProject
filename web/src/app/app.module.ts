@@ -7,7 +7,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/login/login.component';
@@ -23,7 +22,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookResolver } from '../components/book/book.resolver';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { BookDetailsComponent } from '../components/book.details/book.details.component';
-import { FormsModule } from '@angular/forms';
 import { CartComponent } from '../components/cart/cart.component';
 
 @NgModule({
