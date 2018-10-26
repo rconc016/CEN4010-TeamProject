@@ -4,7 +4,6 @@ import {ActivatedRoute, RouterStateSnapshot} from "@angular/router";
 import { Book } from './book.model';
 import { BookInterface } from './book.interface';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { CartService } from '../core/cart.service';
 import { UserService } from '../core/user.service';
 import { CartComponent } from '../cart/cart.component';
 
@@ -20,7 +19,7 @@ export class BookDetailsComponent implements OnInit {
   public book: Book;
 
   public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-    private cartService: CartService, private userService : UserService, private cartComponent : CartComponent) { 
+    private userService : UserService, private cartComponent : CartComponent) { 
     this.book = this.useTestData ? this.getTestData() : this.getData();
   }
 
@@ -48,13 +47,12 @@ export class BookDetailsComponent implements OnInit {
   }
 
   public addToCart(product: Book) {
-    var user = this.userService.getCurrentUser();
+    let user = this.userService.getCurrentUser();
     if (user == null) {
       this.router.navigate(['login']);
     }
-    else {
-      this.cartComponent.addProduct(product);
-    }
+
+    this.cartComponent.addProduct(product);
     
   }
 
