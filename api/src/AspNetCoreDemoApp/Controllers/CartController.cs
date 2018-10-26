@@ -22,9 +22,9 @@ namespace AspNetCoreDemoApp.Controllers
         /// <summary>
         /// GET endpoint to retrieve a single user.
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="cartId"></param>
         /// <returns>The user with the corresponding ID.</returns>
-        [HttpGet("{userId}")]
+        [HttpGet("{cartId}")]
         public ActionResult<Cart> Get(string userId)
         {
             Cart cart = cartService.FindById(userId);
@@ -36,7 +36,7 @@ namespace AspNetCoreDemoApp.Controllers
             return cart;
         }
 
-        [HttpPut("{userId}")]
+        [HttpPut("{cartId}")]
         public ActionResult Put(string userId, [FromBody]Cart cartData)
         {
             Cart cart = cartService.FindById(userId);
