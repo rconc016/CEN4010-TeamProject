@@ -14,6 +14,11 @@ namespace AspNetCoreDemoApp.Models
 
         [FirestoreProperty(name: "cart")]
         public List<Book> Products { get; set; }
+
+        [FirestoreProperty(name: "savedForLater")]
+        public List<Book> SavedForLater { get; set; }
+
+        public int TotalPrice { get; set; }
                 
     }
 }
