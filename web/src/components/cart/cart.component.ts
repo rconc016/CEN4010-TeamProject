@@ -1,19 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-//import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-//import { FirebaseUserModel } from '../core/user.model';
 import { Book } from '../book.details/book.model';
 import { CartService } from '../core/cart.service';
 import { FirebaseCartModel } from '../core/cart.model';
-import { UserComponent } from '../user/user.component';
 
 @Component({
   selector: 'page-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
   cart: FirebaseCartModel;
@@ -25,7 +20,6 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private userComponent: UserComponent
   ) {
   }
 
@@ -34,11 +28,19 @@ export class CartComponent implements OnInit {
   }
 
   addProduct(product: Book) {
-    this.cartService.addToCart(this.cart.id, product);
+    this.cartService.addToCart(this.cart, product);
+
+    this.getCart();
   }
 
   removeProduct(product: Book) {
-    this.cartService.removeFromCart(this.cart.id, product);
+    this.cartService.removeFromCart(this.cart, product);
+
+    this.getCart();
+  }
+
+  saveProduct(product: Book) {
+    this.cartService.saveForLater(this.cart, product);
 
     this.getCart();
   }
@@ -47,13 +49,16 @@ export class CartComponent implements OnInit {
     this.cartService.getCart(this.cart.id)
       .subscribe((data: FirebaseCartModel) => this.cart = {
         id: data['id'],
-        products: data['products']
+        products: data['products'],
+        savedForLater: data['savedForLater'],
+        totalPrice: data['totalPrice']
       });;
 
     if (this.cart.products == null) {
       this.messageTitle;
       this.messageDescription;
     }
+    
   }
 
 }
