@@ -4,6 +4,8 @@ import { Book } from '../book.details/book.model';
 export class FirebaseCartModel {
   id: string;
   products: Book[];
+  savedForLater: Book[];
+  totalPrice: number;
 
   constructor() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -16,5 +18,7 @@ export class FirebaseCartModel {
     });
 
     this.products = [];
+    this.savedForLater = [];
+    this.totalPrice = 0;
   }
 }
