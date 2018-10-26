@@ -7,7 +7,7 @@ import { FirebaseCartModel } from "../core/cart.model";
 @Injectable({
   providedIn: 'root'
 })
-export class CartResolver {
+export class CartResolver implements Resolve<FirebaseCartModel> {
   constructor(private cartService: CartService) {
   }
 
@@ -15,14 +15,7 @@ export class CartResolver {
 
     let cart = new FirebaseCartModel();
 
-    return this.cartService.getCart(route.params['id']);
+    return this.cartService.getCart(cart.id);
   }
 
-  /*resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BookInterface[]> {
-    let sortCommand = new SortCommand();
-    sortCommand.key = this.sortKey;
-    sortCommand.sortBy = SortDirection.Asc;
-
-    return this.bookService.findAll(sortCommand, null, null);
-  }*/
 }
