@@ -1,21 +1,12 @@
 import { Injectable } from "@angular/core";
-import {
-  AngularFireDatabase,
-  AngularFireList,
-  AngularFireObject
-} from "angularfire2/database";
-import { Book } from "../book.details/book.model";
-import { AuthService } from "./auth.service";
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
 import { environment } from '../../environments/environment';
 import { FirebaseCartModel } from '../core/cart.model';
 import { Observable } from 'rxjs';
-import { UserComponent } from '../user/user.component';
-//import { CartComponent } from '../cart/cart.component';
+import { Book } from '../book.details/book.model';
 
 
 const httpOptions = {
@@ -29,39 +20,47 @@ export class CartService {
   url: string = `${environment.apiUrl}/cart/`
 
   successAdd = "Item was successfully added to cart";
+  successSave = "Item was successfully saved for later";
 
   constructor(
     public db: AngularFirestore,
     public afAuth: AngularFireAuth,
-    private http: HttpClient,
-    private userComponent: UserComponent,
-    //private cartComponent: CartComponent
+    private http: HttpClient
   ) {
   }
-  
+
   // Adding new Product to cart db 
-  addToCart(userId: string, product: Book): void {
-   /* var cart = this.cartComponent.cart
+  addToCart(cart: FirebaseCartModel, product: Book): void {
 
     cart.products.push(product);
     this.updateCart(cart);
-    this.successAdd;*/
+    this.successAdd;
+
   }
 
   // Removing product from cart
-  removeFromCart(userId : string, product: Book) {
-    /*var cart = this.cartComponent.cart
+  removeFromCart(cart: FirebaseCartModel, product: Book) {
 
     for (let i = 0; i < cart.products.length; i++) {
-      if (cart[i].products.id === product.id) {
+      if (cart.products[i].id === product.id) {
         cart.products.splice(i, 1);
         break;
-      
-    }
-    
-    this.updateCart(cart);
 
-    //this.calculateLocalCartProdCounts();*/
+      }
+
+      this.totalPrice(cart);
+      this.updateCart(cart);
+    }
+
+  }
+
+  // Save Product for Later
+  saveForLater(cart: FirebaseCartModel, product: Book) {
+
+    cart.savedForLater.push(product);
+    this.removeFromCart(cart, product);
+    this.successSave;
+    
   }
 
   //Update Cart
@@ -75,9 +74,14 @@ export class CartService {
     return this.http.get<FirebaseCartModel>(this.url + id);
   }
 
-  // returning LocalCarts Product Count
-  /*calculateLocalCartProdCounts() {
-    this.navbarCartCount = this.getCart().length;
-  }*/
+  // Return Total Price of Cart
+  totalPrice(cart: FirebaseCartModel) {
+   
+    for (let i = 0; i < cart.products.length; i++) {
+      cart.totalPrice = cart.totalPrice + cart.products[i].price; 
+    }
+    
+  }
+
 }
 
