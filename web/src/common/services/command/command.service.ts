@@ -132,7 +132,7 @@ export class CommandService {
    */
   private appendDateParam(params: HttpParams, key: string, value?: Date) {
     if (value) {
-        params = this.appendParam(params, key, `${value.getFullYear()}-${value.getDate()}-${value.getMonth()}`);
+        params = this.appendParam(params, key, `${value.getUTCMonth() + 1}/${value.getUTCDate()}/${value.getUTCFullYear()}`);
     }
 
     return params;

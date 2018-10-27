@@ -1,7 +1,7 @@
 .main-container {
     padding: 5rem;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .sort-row {
@@ -11,4 +11,71 @@
 .tile-image {
     width: 60rem;
     height: 40rem;
+}
+
+.checkbox {
+    margin: 0rem;
+}
+
+.filter-row {
+    margin-top: 2.5rem;
+}
+
+.small-textfield {
+    width: 130%;
+    height: 3rem;
+}
+
+.rating-filter {
+    cursor: pointer !important;
+}
+
+.rating-filter:hover {
+    color: #cf8412;
+}
+
+.rating-filter-selected {
+    font-weight: bold;
+}
+
+.panel-heading {
+    background-color: #343a40;
+}
+
+.btn-sm {
+    border: 1px solid;
+}
+
+.go-button {
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    color: white;
+}
+
+h2 {
+    font-weight: bold;  
+    font-size: 1.3rem;
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+}
+
+input[type="number"] {
+    font-size: 1.2rem;
+    border-radius: 3px;
+    border: 1px solid;
+    padding-left: 0.3rem;
+}
+
+input[type="date"] {
+    font-size: 1.2rem;
+    border-radius: 3px;
+    border: 1px solid;
+    margin-bottom: 1rem;
 }
