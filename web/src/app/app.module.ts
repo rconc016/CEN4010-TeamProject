@@ -7,8 +7,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { ScrollEventModule } from 'ngx-scroll-event';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/login/login.component';
@@ -45,8 +46,9 @@ import { BookDetailsComponent } from '../components/book.details/book.details.co
     AngularFireAuthModule,
     NgbModule,
     FormsModule,
-    MatGridListModule,
-    ScrollEventModule
+    ScrollEventModule,
+	BrowserAnimationsModule,
+	MaterialModule
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver],
   bootstrap: [AppComponent]
