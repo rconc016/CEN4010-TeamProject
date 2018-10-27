@@ -2,7 +2,7 @@
   <div class="row">
     <!-- Filter Column -->
     <div class="col">
-      <div class="panel panel-default details-panel"> 
+      <div class="panel panel-default details-panel filter-panel"> 
         <div class="panel-heading"><h1> Refine Search</h1></div>
         <div class="panel-body details-panel-body">
           <!-- Top Seller Filter -->
@@ -137,13 +137,23 @@
           </div>
         </div>
       </div>
+    
       <div class="row">
         <div class="col">
-          <mat-grid-list cols="4" rowHeight="40rem">
-            <mat-grid-tile *ngFor="let book of books; let i = index" [attr.data-index]="i">
-              <img class="tile-image" src="{{book.imageUrl}}" (click)="selectBook(book)"/>
-            </mat-grid-tile>
-          </mat-grid-list>
+          <div class="grid">
+            <mat-card *ngFor="let book of books; let i = index" [attr.data-index]="i">
+              <mat-card-header>
+                <mat-card-title><b>{{book.title}}</b></mat-card-title>
+                <mat-card-subtitle class="mat-card-author">by {{book.author}}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-subtitle class="mat-card-price text-right">{{book.price | currency}}</mat-card-subtitle>
+              <img mat-card-image src="{{book.imageUrl}}" alt="Book image">
+              <mat-card-actions>
+                <button mat-button (click)="selectBook(book)">Details</button>
+                <button class="pull-right" mat-button>Add to Cart</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
         </div>
       </div>
     </div>

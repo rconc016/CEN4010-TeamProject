@@ -1,7 +1,7 @@
 .main-container {
     padding: 5rem;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 .sort-row {
@@ -13,8 +13,8 @@
     height: 40rem;
 }
 
-.checkbox {
-    margin: 0rem;
+.filter-panel {
+    width: 100%;
 }
 
 .filter-row {
@@ -22,7 +22,7 @@
 }
 
 .small-textfield {
-    width: 130%;
+    width: 160%;
     height: 3rem;
 }
 
@@ -50,6 +50,37 @@
     width: 100%;
     background-color: #343a40;
     color: white;
+}
+
+.grid {
+    display: grid; 
+    grid-template-columns: auto auto; 
+    grid-gap: 5rem;
+}
+
+.mat-card {
+    max-width: 35rem;
+}
+
+.mat-card-title {
+    font-size: 2rem;
+}
+
+.mat-card-subtitle {
+    font-size: 1.3rem;
+}
+
+.mat-card-image {
+    margin-bottom: 0rem;
+}
+
+.mat-card-author {
+    font-style: italic;
+}
+
+.mat-card-price {
+    font-weight: bold;
+    font-size: 2rem;
 }
 
 h1 {
