@@ -1,0 +1,38 @@
+<div class="container-fluid comments-container">
+  <div class="row">
+    <h1 class="review-label">Reviews</h1>
+  </div>
+  <div class="row submit-review-row">
+    <form class="submit-review-form">
+      <div class="form-group">
+        <textarea class="form-control" rows="4" placeholder="Leave a review..." [(ngModel)]="reviewComment" name="reviewComment"></textarea>
+      </div>
+      <div class="row checkbox-row">
+        <div class="col-xs">
+          <div class="checkbox">
+            <label><input type="checkbox" [(ngModel)]="useNickname" name="useNickname" checked>Use Nickname</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="checkbox">
+            <label><input type="checkbox" [(ngModel)]="isAnonymous" name="isAnonymous">Anonymous</label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="submitReview()">Submit</button>
+    </form>
+  </div>
+  <div class="row">
+    <span *ngIf="reviews.length === 0" class="no-reviews-label">No reviews have been written yet.</span>
+    <div *ngFor="let review of reviews" class="row review-row">
+      <div class="col">
+        <div class="row">
+          <div class="col"><span class="user">{{review.username}}</span></div>
+          <div class="col text-right"><span class="comment-date">{{review.date | date:'mediumDate'}}</span></div>
+        </div>
+        <p>{{review.comment}}</p>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
