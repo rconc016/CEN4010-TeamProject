@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row rating-row">
+    <div class="col text-center">
+      <img class="book-image" src="{{book.imageUrl}}" />
+      <h1 class="rating-text">What did you think of <i>{{book.title}}</i>?</h1>
+      <ng-template #rating let-fill="fill">
+        <span class="star" [class.full]="fill === 100">
+          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+        </span>
+      </ng-template>          
+      <ngb-rating [(rate)]="bookRating" [starTemplate]="rating" max="5"></ngb-rating>
+      <br>
+      <div class="row">
+        <div class="col"><button class="btn btn-danger submit-button" (click)="return()">Cancel</button></div>
+        <div class="col"><button class="btn btn-success submit-button" (click)="submit()">Submit</button></div>
+      </div>
+    </div>
+  </div>
+</div>

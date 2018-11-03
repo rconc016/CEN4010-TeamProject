@@ -38,5 +38,13 @@ namespace AspNetCoreDemoApp.Services
         /// <param name="command">The book specific filter command.</param>
         /// <returns></returns>
         IList<FilterCommand> GetFilterCommands(BookFilterCommand command);
+
+        /// <summary>
+        /// Updates the given book's rating score.
+        /// </summary>
+        /// <param name="bookId">The ID of the book to update.</param>
+        /// <param name="rating">The new rating score to be added.</param>
+        /// <returns>True if the update was successful, false otherwise.</returns>
+        bool UpdateRating(string bookId, double rating);
     }
 }

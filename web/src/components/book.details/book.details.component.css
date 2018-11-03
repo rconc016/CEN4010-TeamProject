@@ -68,3 +68,21 @@
 .buy-button {
     width: 100%;
 }
+
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 3rem;
+    color: #d3d3d3;
+}
+
+.full {
+    color: #e4d124;
+}
+
+.half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: #e4d124;
+}

@@ -56,4 +56,18 @@ export class BookService {
   public findById(bookId: string) {
     return this.http.get<BookInterface>(`${this.url}/${bookId}`);
   }
+
+  /**
+   * Updates a books rating.
+   * @param bookId The ID of the book to update.
+   * @param rating The new rating to be added.
+   */
+  public updateRating(bookId: string, rating: number) {
+    let body = {
+      bookId: bookId,
+      rating: rating
+    };
+
+    return this.http.post(`${this.url}/rate`, body);
+  }
 }

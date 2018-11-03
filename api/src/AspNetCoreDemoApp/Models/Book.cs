@@ -8,6 +8,8 @@ namespace AspNetCoreDemoApp.Models
     [FirestoreData]
     public class Book : IFirestoreDocumentModel
     {
+        private const string Zero = "0";
+
         public string Id { get; set; }
 
         [FirestoreProperty(name: "title")]
@@ -17,10 +19,13 @@ namespace AspNetCoreDemoApp.Models
         public string Author { get; set; }
 
         [FirestoreProperty(name: "price")]
-        public string Price { get; set; }
+        public string Price { get; set; } = Zero;
 
         [FirestoreProperty(name: "rating")]
-        public string Rating { get; set; }
+        public string Rating { get; set; } = Zero;
+
+        [FirestoreProperty(name: "ratingsCount")]
+        public string RatingsCount { get; set; } = Zero;
 
         [FirestoreProperty(name: "releaseDate")]
         public DateTime ReleaseDate { get; set; }

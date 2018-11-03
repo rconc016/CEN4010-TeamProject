@@ -1,0 +1,40 @@
+.rating-row {
+    padding-top: 5rem;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.book-image {
+    width: 40%;
+}
+
+.rating-text {
+    font-size: 2vw;
+}
+
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 4vw;
+    color: #d3d3d3;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.full {
+    color: #e4d124;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: #e4d124;
+}
+
+.submit-button {
+    font-size: 1vw;
+    width: 50%;
+}

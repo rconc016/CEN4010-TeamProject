@@ -16,7 +16,10 @@ export class BookDetailsComponent implements OnInit {
   public id: string;
   public book: Book;
 
-  public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder) { 
+  public constructor(private route: ActivatedRoute, private router: Router) { 
+  }
+
+  public ngOnInit() {
     this.book = this.useTestData ? this.getTestData() : this.getData();
   }
 
@@ -41,8 +44,5 @@ export class BookDetailsComponent implements OnInit {
 
   public navigateToBrowserPage() {
     this.router.navigate(['book']);
-  }
-
-  public ngOnInit() {
   }
 }
