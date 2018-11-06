@@ -59,6 +59,27 @@ export class BookComponent implements OnInit {
     this.offset = 0;
     this.topSellerFilterName = BookComponent.topSellerFilterBoth;
     this.topSellerFilterValue = TopSellerStatus.Both;
+    this.loadQuery();
+  }
+
+  /**
+   * Applies the author filter if one was given
+   * in the URL query string.
+   */
+  private loadQuery() {
+    let params = this.route.queryParams
+      .subscribe(params => {
+        let author = params['author'];
+
+        if (author) {
+          this.authorFilterValue = author;
+          this.applyFilters();
+        }
+
+        this.router.navigate([], {
+          queryParams: {}
+        });
+      });
   }
     
   /**
