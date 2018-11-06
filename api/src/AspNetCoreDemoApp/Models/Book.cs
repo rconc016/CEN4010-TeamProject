@@ -22,6 +22,9 @@ namespace AspNetCoreDemoApp.Models
         [FirestoreProperty(name: "rating")]
         public string Rating { get; set; }
 
+        [FirestoreProperty(name: "ratingsCount")]
+        public string RatingsCount { get; set; }
+
         [FirestoreProperty(name: "releaseDate")]
         public DateTime ReleaseDate { get; set; }
 
