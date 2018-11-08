@@ -28,6 +28,8 @@ export class CartComponent implements OnInit {
   }
 
   addProduct(product: Book) {
+    this.getCart();
+
     this.cartService.addToCart(this.cart, product);
 
     this.getCart();
