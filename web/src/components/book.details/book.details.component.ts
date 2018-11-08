@@ -6,6 +6,7 @@ import { BookInterface } from './book.interface';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../core/user.service';
 import { CartComponent } from '../cart/cart.component';
+import { UserComponent } from '../user/user.component';
 
 @Component({
   selector: 'app-book',
@@ -19,7 +20,7 @@ export class BookDetailsComponent implements OnInit {
   public book: Book;
 
   public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-    private userService : UserService, private cartComponent : CartComponent) { 
+    private userService : UserService, private cartComponent : CartComponent, private userComponent: UserComponent) { 
     this.book = this.useTestData ? this.getTestData() : this.getData();
   }
 
@@ -47,8 +48,12 @@ export class BookDetailsComponent implements OnInit {
   }
 
   public addToCart(product: Book) {
-    let user = this.userService.getCurrentUser();
-    if (user == null) {
+    console.log("hello");
+    console.log(this.userComponent.user);
+    this.userComponent.getUser();
+    console.log("hello2");
+    console.log(this.userComponent.user)
+    if (this.userComponent.user == null) {
       this.router.navigate(['login']);
     }
 
