@@ -66,65 +66,37 @@
               <div [hidden]="billing.valid || billing.pristine" class="alert alert-danger">
                 Billing Address is required
               </div>
-            </div>
-            <!--<div class="form-group">
-    <label for="shippingAddress">Shipping Address</label>
-    <input type="text" class="form-control" id="shippingAddress"
-           required
-           [(ngModel)]="user.shippingAddress" name="shippingAddress"
-           #shipping="ngModel">
-    <div [hidden]="shipping.valid || shipping.pristine" class="alert alert-danger">
-      Shipping Address is required
-    </div>
-  </div>-->
-            <div [formGroup]="profileForm">
-              <div formArrayName="shippingAddresses">
-                <div *ngFor="let shippingAddress of profileForm.get('shippingAddresses').controls; let i=index">
-                  <!--<div class="panel-heading">
-          <span class="glyphicon glyphicon-remove pull-right" *ngIf="profileForm.controls.shippingAddresses.controls.length > 1" (click)="removeLanguage(i)"></span>
-        </div>-->
-                  <label>Shipping Address {{i + 1}} </label>
-                  <div [formGroupName]="i">
-                    <input formControlName="shippingAddress">
-                  </div>
-                  <!--<div class="form-group">
-          <label for="shippingAddress">Shipping Address {{i + 1}} </label>
-          <input type="text" class="form-control" id="shippingAddress"
-                 [(ngModel)]="user.shippingAddress" name="shippingAddress"
-                 #shipping="ngModel">
-        </div>-->
-                </div>
+            </div>      
+            <div *ngFor="let shippingAddress of user.shippingAddress, let i=index">
+              <div class="form-group">
+                <label for="shippingAddress">Shipping Address {{i+1}}</label>
+                <input type="text" class="form-control" id="shippingAddress"
+                       [(ngModel)]="user.shippingAddress[i]" name="shippingAddress{{i}}"
+                       #shipping="ngModel">
+                <button type="button" (click)="removeShippingAddress(user.shippingAddress[i])" class="btn btn-link">Remove</button>
               </div>
             </div>
             <div>
-              <button type="button" (click)="addShippingAddress()" class="btn btn-link">+ add Shipping Address</button>
+              <button type="button" (click)="addShippingAddress()">+ add Shipping Address</button>
             </div>
-            <!--<div [formGroup]="profileForm">
-              <div formArrayName="creditCards">
-                <div *ngFor="let creditCard of profileForm.get('creditCards').controls; let i=index">
-                  <label>Credit Card {{i + 1}} </label>
-                  <div [formGroupName]="i">
-                    <input formControlName="creditCards">
-                  </div>
-                </div>
+            <br />
+            <div *ngFor="let creditCard of user.creditCards, let i=index">
+              <div class="form-group">
+                <label for="creditCards">Credit Card {{i+1}}</label>
+                <input type="text" class="form-control" id="creditCards"
+                       [(ngModel)]="user.creditCards[i]" name="creditCards{{i}}"
+                       #card="ngModel">
+                <button type="button" (click)="removeCreditCard(user.creditCards[i])" class="btn btn-link">Remove</button>
               </div>
-            </div>-->
-            <!--<div formArrayName="creditCards">
-    <div *ngFor="let creditCard of profileForm.get('creditCards').controls; let i=index">
-      <div class="form-group">
-        <label for="creditCard">Credit Card {{i + 1}} </label>
-        <input type="text" class="form-control" id="creditCard"
-               [(ngModel)]="user.creditCard" name="creditCard"
-               #card="ngModel">
-      </div>
-    </div>
-  </div>-->
-            <div>
-              <button type="button" (click)="addCreditCard()" class="btn btn-link">+ add Credit Card</button>
             </div>
+            <div>
+              <button type="button" (click)="addCreditCard()">+ add Credit Card</button>
+            </div>
+            <br /><br />
             <div>
               <button type="submit" class="btn btn-success" [disabled]="!userForm.valid">Submit</button>
-              <button type="button" (click)="logout()" class="btn btn-link">Logout</button>
+              <div class="divider"></div>
+              <button type="button" (click)="logout()" class="btn btn-danger">Logout</button>
             </div>
           </form>
       </div>
