@@ -9,8 +9,9 @@ export class FirebaseUserModel {
   email: string;
   id: string;
   billingAddress: string;
-  shippingAddress: string;
+  shippingAddress: string[];
   nickname: string;
+  creditCards: string[];
 
   constructor(){
     this.image = '';
@@ -20,6 +21,8 @@ export class FirebaseUserModel {
     this.lastName = '';
     this.email = '';
     this.nickname = '';
+    this.shippingAddress = [];
+    this.creditCards = [];
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
 
