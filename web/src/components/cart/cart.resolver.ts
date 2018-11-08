@@ -8,6 +8,7 @@ import { FirebaseCartModel } from "../core/cart.model";
   providedIn: 'root'
 })
 export class CartResolver implements Resolve<FirebaseCartModel> {
+
   constructor(private cartService: CartService) {
   }
 
