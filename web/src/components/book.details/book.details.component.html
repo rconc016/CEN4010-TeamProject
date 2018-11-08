@@ -13,7 +13,7 @@
         <div class="panel panel-default details-panel"> 
           <div class="panel-heading">About</div>
           <div class="panel-body details-panel-body">
-            <div class="row">Author: {{book.author}}</div>
+            <div class="row">Author: <a [href]="'book?author=' + book.author">{{book.author}}</a></div>
             <div class="row">Release Date: {{book.releaseDate | date:'mediumDate'}}</div>
             <div class="row">Genre: {{book.genre}}</div>
             <div class="row">Price: {{book.price | currency}}</div>

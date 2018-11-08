@@ -1,31 +1,165 @@
 <div class="container-fluid main-container">
-  <div class="row sort-row">
-    <div class="col"><label>Filter: <input (keyup)="saveQuery($event)" /></label></div>
+  <div class="row">
+    <!-- Filter Column -->
     <div class="col">
-      <div class="row pull-right">
-        <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Sort by: {{selectedSortingOption.name}}</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button *ngFor="let option of bookSortingOptions" class="dropdown-item" (click)="setSelectedSortingOption(option)">{{option.name}}</button>
+      <div class="panel panel-default details-panel filter-panel"> 
+        <div class="panel-heading"><h1> Refine Search</h1></div>
+        <div class="panel-body details-panel-body">
+          <!-- Top Seller Filter -->
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col"><h2>Top Seller</h2></div>
+              </div>
+              <div class="row"> 
+                <div class="col">
+                  <div ngbDropdown class="dropdown">
+                    <button class="btn btn-sm" ngbDropdownToggle>{{topSellerFilterName}}</button>
+                    <div ngbDropdownMenu>
+                      <button class="dropdown-item" (click)="setTopSellerFilter(0)">Both</button>
+                      <button class="dropdown-item" (click)="setTopSellerFilter(1)">Top Seller</button>
+                      <button class="dropdown-item" (click)="setTopSellerFilter(2)">Regular</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{selectedSortingDirection}}</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button class="dropdown-item" (click)="setAscSortingDirection()">Ascending</button>
-            <button class="dropdown-item" (click)="setDescSortingDirection()">Descending</button>
+
+          <!-- Title Filter -->
+          <div class="row filter-row">
+            <div class="col">
+              <div class="row">
+                <div class="col"><h2>Title</h2></div>
+              </div>
+              <div class="row"> 
+                <div class="col"><input [(ngModel)]="titleFilterValue" /></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Author Filter -->
+          <div class="row filter-row">
+            <div class="col">
+              <div class="row">
+                <div class="col"><h2>Author</h2></div>
+              </div>
+              <div class="row"> 
+                <div class="col"><input [(ngModel)]="authorFilterValue" /></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Genre Filter -->
+          <div class="row filter-row">
+            <div class="col">
+              <div class="row">
+                <div class="col"><h2>Genre</h2></div>
+              </div>
+              <div class="row"> 
+                <div class="col"><input [(ngModel)]="genreFilterValue" /></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Filter -->
+          <div class="row filter-row">
+            <div class="col">
+              <div class="row">
+                <div class="col"><h2>Price</h2></div>
+              </div>
+              <div class="row"> 
+                <div class="col"><input type="number" min="0.00" step="1.00" class="small-textfield" placeholder="$ MIN" [(ngModel)]="minPriceFilterValue" /></div>
+                <div class="col"><input type="number" min="0.00" step="1.00" class="small-textfield" placeholder="$ MAX" [(ngModel)]="maxPriceFilterValue" /></div>
+                <div class="col"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Release Date Filter -->
+          <div class="row filter-row">
+            <div class="col">
+              <div class="row">
+                <div class="col"><h2>Release Date</h2></div>
+              </div>
+              <div class="row"> 
+                <div class="col"><input type="date" [(ngModel)]="minDateFilterValue" /> From</div>
+              </div>
+              <div class="row"> 
+                <div class="col"><input type="date" [(ngModel)]="maxDateFilterValue" /> To</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rating Filter -->
+          <div class="row filter-row">
+            <div class="col">
+              <div class="row">
+                <div class="col"><h2>Rating</h2></div>
+              </div>
+              <div class="row"> 
+                <div class="col">
+                  <div class="row" *ngFor="let item of [0,1,2,3]; let i = index;">
+                    <div class="col">
+                      <span class="rating-filter" [style.font-weight]="(4-i) === ratingFilterValue ? 'bold' : 'normal'" (click)="setRatingFilter(4-i)"><ngb-rating [rate]="4-i" readonly="true" max="5"></ngb-rating> & Up</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row filter-row">
+            <div class="col"><button class="btn btn-sm go-button" (click)="applyFilters()">Go</button></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <mat-grid-list cols="4" rowHeight="40rem">
-        <mat-grid-tile *ngFor="let book of filterBooks(this.query); let i = index" [attr.data-index]="i">
-          <img class="tile-image" src="{{book.imageUrl}}" (click)="selectBook(book)"/>
-        </mat-grid-tile>
-      </mat-grid-list>
+
+    <!-- Content Column -->
+    <div class="col-8">
+      <div class="row sort-row">
+        <div class="col">
+          <div class="row pull-right">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Sort by: {{selectedSortingOption.name}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let option of bookSortingOptions" class="dropdown-item" (click)="setSelectedSortingOption(option)">{{option.name}}</button>
+              </div>
+            </div>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{selectedSortingDirectionName}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item" (click)="setAscSortingDirection()">Ascending</button>
+                <button class="dropdown-item" (click)="setDescSortingDirection()">Descending</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col">
+          <div class="grid">
+            <mat-card *ngFor="let book of books; let i = index" [attr.data-index]="i">
+              <mat-card-header>
+                <mat-card-title><b>{{book.title}}</b></mat-card-title>
+                <mat-card-subtitle class="mat-card-author">by <a [href]="router.url + '?author=' + book.author">{{book.author}}</a></mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-subtitle class="mat-card-price text-right">{{book.price | currency}}</mat-card-subtitle>
+              <img mat-card-image src="{{book.imageUrl}}" alt="Book image">
+              <mat-card-actions>
+                <button mat-button (click)="selectBook(book)">Details</button>
+                <button class="pull-right" mat-button>Add to Cart</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Empty Column -->
+    <div class="col"></div>
   </div>
 </div>
+<div detect-scroll (onScroll)="loadAdditionalBooks($event)" [bottomOffset]="5"></div>

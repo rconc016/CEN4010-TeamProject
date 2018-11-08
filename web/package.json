@@ -35,6 +35,7 @@
     "firebase": "^5.5.5",
     "ng2-bootstrap": "^1.4.0",
     "ngx-bootstrap": "^3.0.1",
+	"ngx-scroll-event": "^1.0.8",
     "node-sass": "^4.5.3",
     "npm": "^6.4.1",
     "rxjs": "^6.2.0",

@@ -12,3 +12,101 @@
     width: 60rem;
     height: 40rem;
 }
+
+.filter-panel {
+    width: 100%;
+}
+
+.filter-row {
+    margin-top: 2.5rem;
+}
+
+.small-textfield {
+    width: 160%;
+    height: 3rem;
+}
+
+.rating-filter {
+    cursor: pointer !important;
+}
+
+.rating-filter:hover {
+    color: #cf8412;
+}
+
+.rating-filter-selected {
+    font-weight: bold;
+}
+
+.panel-heading {
+    background-color: #343a40;
+}
+
+.btn-sm {
+    border: 1px solid;
+}
+
+.go-button {
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+}
+
+.grid {
+    display: grid; 
+    grid-template-columns: auto auto; 
+    grid-gap: 5rem;
+}
+
+.mat-card {
+    max-width: 35rem;
+}
+
+.mat-card-title {
+    font-size: 2rem;
+}
+
+.mat-card-subtitle {
+    font-size: 1.3rem;
+}
+
+.mat-card-image {
+    margin-bottom: 0rem;
+}
+
+.mat-card-author {
+    font-style: italic;
+}
+
+.mat-card-price {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    color: white;
+}
+
+h2 {
+    font-weight: bold;  
+    font-size: 1.3rem;
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+}
+
+input[type="number"] {
+    font-size: 1.2rem;
+    border-radius: 3px;
+    border: 1px solid;
+    padding-left: 0.3rem;
+}
+
+input[type="date"] {
+    font-size: 1.2rem;
+    border-radius: 3px;
+    border: 1px solid;
+    margin-bottom: 1rem;
+}
