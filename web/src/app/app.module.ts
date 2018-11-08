@@ -23,6 +23,8 @@ import { BookResolver } from '../components/book/book.resolver';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { BookDetailsComponent } from '../components/book.details/book.details.component';
 import { CartComponent } from '../components/cart/cart.component';
+import { CartResolver } from '../components/cart/cart.resolver';
+import { CartService } from '../components/core/cart.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,7 @@ import { CartComponent } from '../components/cart/cart.component';
     FormsModule,
     MatGridListModule
   ],
-  providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver],
+  providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver, CartComponent, CartService, CartResolver, UserComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
