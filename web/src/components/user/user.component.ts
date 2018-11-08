@@ -19,8 +19,6 @@ export class UserComponent implements OnInit {
   errorMessageEmail: string = '';
   successMessagePassword: string = '';
   errorMessagePassword: string = '';
-  shippingAddresses: FormArray
-  creditCards: FormArray
 
   constructor(
     private userService: UserService,
@@ -46,22 +44,8 @@ export class UserComponent implements OnInit {
 
   createForm(name) {
     this.profileForm = this.fb.group({
-      name: [name, Validators.required],
-      shippingAddresses: this.fb.array([this.initShippingAddresses()]),
-      creditCard: this.fb.array([this.initCreditCards()])
+      name: [name, Validators.required]
     });
-  }
-
-  initShippingAddresses() {
-    return this.fb.group({
-      shippingAddress: ['']
-    })
-  }
-
-  initCreditCards() {
-    return this.fb.group({
-      creditCard: ['']
-    })
   }
 
   updateEmail(email:string) {
@@ -91,18 +75,30 @@ export class UserComponent implements OnInit {
   }
 
   addShippingAddress() {
-    this.shippingAddresses = this.profileForm.get('shippingAddresses') as FormArray;
-    this.shippingAddresses.push(this.initShippingAddresses());
-    for (let i = 0; i < this.shippingAddresses.length; i++) {
-      this.user.shippingAddress.push(this.shippingAddresses[i]);
+    this.user.shippingAddress.push('');
+  };
+
+  removeShippingAddress(shippingAddress: string) {
+    for (let i = 0; i < this.user.shippingAddress.length; i++) {
+      if (this.user.shippingAddress[i] === shippingAddress) {
+        this.user.shippingAddress.splice(i, 1);
+        break;
+
+      }
     }
   }
 
   addCreditCard() {
-    this.creditCards = this.profileForm.get('creditCards') as FormArray;
-    this.creditCards.push(this.initCreditCards());
-    for (let i = 0; i < this.creditCards.length; i++) {
-      this.user.creditCards.push(this.creditCards[i]);
+    this.user.creditCards.push('');
+  }
+
+  removeCreditCard(creditCard: string) {
+    for (let i = 0; i < this.user.creditCards.length; i++) {
+      if (this.user.creditCards[i] === creditCard) {
+        this.user.creditCards.splice(i, 1);
+        break;
+
+      }
     }
   }
 
