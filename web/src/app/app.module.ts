@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { NgXCreditCardsModule } from 'ngx-credit-cards';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/login/login.component';
@@ -53,8 +54,9 @@ import { CartService } from '../components/core/cart.service';
     NgbModule,
     FormsModule,
     ScrollEventModule,
-	BrowserAnimationsModule,
-	MaterialModule
+	  BrowserAnimationsModule,
+    MaterialModule,
+    NgXCreditCardsModule
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver, CartComponent, CartService, CartResolver, UserComponent],
   bootstrap: [AppComponent]
