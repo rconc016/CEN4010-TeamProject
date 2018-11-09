@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
 import * as firebase from 'firebase';
+import { CreditCardValidator } from 'ngx-credit-cards';
 
 @Component({
   selector: 'page-user',
@@ -44,7 +45,11 @@ export class UserComponent implements OnInit {
 
   createForm(name) {
     this.profileForm = this.fb.group({
-      name: [name, Validators.required]
+      name: [name, Validators.required],
+      cardNumber: ['', CreditCardValidator.validateCardNumber],
+      cardExpDate: ['', CreditCardValidator.validateCardExpiry],
+      cardCvv: ['', CreditCardValidator.validateCardCvc],
+      cardName: ['', Validators.compose([Validators.required, Validators.minLength(2)])]
     });
   }
 
@@ -89,12 +94,12 @@ export class UserComponent implements OnInit {
   }
 
   addCreditCard() {
-    this.user.creditCards.push('');
+    this.user.creditCards.push({cardNumber:'', expirationDate:'', cvc:'', cardName:''});
   }
 
   removeCreditCard(creditCard: string) {
     for (let i = 0; i < this.user.creditCards.length; i++) {
-      if (this.user.creditCards[i] === creditCard) {
+      if (this.user.creditCards[i].cardNumber === creditCard) {
         this.user.creditCards.splice(i, 1);
         break;
 
