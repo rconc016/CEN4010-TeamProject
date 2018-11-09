@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import { Card } from './card.model';
 
 export class FirebaseUserModel {
   image: string;
@@ -11,7 +12,7 @@ export class FirebaseUserModel {
   billingAddress: string;
   shippingAddress: string[];
   nickname: string;
-  creditCards: string[];
+  creditCards: Card[];
 
   constructor(){
     this.image = '';
