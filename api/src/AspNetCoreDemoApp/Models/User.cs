@@ -1,6 +1,7 @@
 using System;
 using Google.Cloud.Firestore;
 
+
 namespace AspNetCoreDemoApp.Models
 {
     [FirestoreData]
@@ -36,6 +37,6 @@ namespace AspNetCoreDemoApp.Models
         public string Email { get; set; }
 
         [FirestoreProperty(name: "creditCards")]
-        public string[] CreditCards { get; set; }
+        public Card[] CreditCards { get; set; }
     }
 }
