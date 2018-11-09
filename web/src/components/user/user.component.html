@@ -83,10 +83,28 @@
             <div *ngFor="let creditCard of user.creditCards, let i=index">
               <div class="form-group">
                 <label for="creditCards">Credit Card {{i+1}}</label>
-                <input type="text" class="form-control" id="creditCards"
-                       [(ngModel)]="user.creditCards[i]" name="creditCards{{i}}"
-                       #card="ngModel">
-                <button type="button" (click)="removeCreditCard(user.creditCards[i])" class="btn btn-link">Remove</button>
+                <!--<input type="tel" class="form-control" [(ngModel)]="user.creditCards[i].cardName" name="cardName{{i}}"
+                       [formControl]="profileForm.controls.cardName" placeholder="Name on Credit Card" id="cc-name">
+                <div [hidden]="profileForm.controls.cardName.valid || profileForm.controls.cardName.pristine" class="alert alert-danger">
+                  Invalid Name
+                </div>-->
+                <input type="tel" class="form-control" name="cardNumber{{i}}" 
+                       [formControl]="profileForm.controls.cardNumber" placeholder="Credit Card Number" autocomplete="cc-number" id="cc-number" ccNum
+                       [ngClass]="{invalid: !user.creditCards[i].cardNumber.valid}">
+                <div [hidden]="profileForm.controls.cardNumber.valid || profileForm.controls.cardNumber.pristine" class="alert alert-danger">
+                  Invalid Number
+                </div>
+                <!--<input type="tel" class="form-control" [(ngModel)]="user.creditCards[i].expirationDate" name="cardExpDate{{i}}"
+                       [formControl]="profileForm.controls.cardExpDate" placeholder="Credit Card Expiration Date" autocomplete="cc-exp" id="cc-exp" ccExp>
+                <div [hidden]="profileForm.controls.cardExpDate.valid || profileForm.controls.cardExpDate.pristine" class="alert alert-danger">
+                  Invalid Expiration Date
+                </div>
+                <input type="tel" class="form-control" [(ngModel)]="user.creditCards[i].cvc" name="cardCvv{{i}}"
+                       [formControl]="profileForm.controls.cardCvv" placeholder="Credit Card CVV" autocomplete="cc-cvc" id="cc-csc" ccCvc>
+                <div [hidden]="profileForm.controls.cardCvv.valid || profileForm.controls.cardCvv.pristine" class="alert alert-danger">
+                  Invalid CVV
+                </div>-->
+                <button type="button" (click)="removeCreditCard(user.creditCards[i].cardNumber)" class="btn btn-link">Remove</button>
               </div>
             </div>
             <div>
