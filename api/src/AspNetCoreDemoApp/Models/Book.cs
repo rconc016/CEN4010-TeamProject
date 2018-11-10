@@ -16,6 +16,12 @@ namespace AspNetCoreDemoApp.Models
         [FirestoreProperty(name: "author")]
         public string Author { get; set; }
 
+        [FirestoreProperty(name: "authorId")]
+        public string AuthorId { get; set; }
+
+        [FirestoreProperty(name: "descriptionId")]
+        public string DescriptionId { get; set; }
+
         [FirestoreProperty(name: "price")]
         public string Price { get; set; }
 
