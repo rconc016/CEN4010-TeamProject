@@ -1,23 +1,23 @@
 <div class="container-fluid main-container">
   <div class="row"><h1>Shopping Cart</h1></div>
-  <div *ngFor="let product of cart.products">
-    <div class="row"><h1>{{book.title}}</h1></div>
+  <div *ngFor="let product of cart.products, let i=index">
+    <div class="row"><h1>{{cart.products[i].title}}</h1></div>
     <div class="row">
       <div class="col">
         <div class="row image-container">
-          <img class="book-image" src="{{book.imageUrl}}" />
+          <img class="book-image" src="{{cart.products[i].imageUrl}}" />
           <img *ngIf="book.topSeller" class="top-seller" src="assets/img/top-seller.png" />
         </div>
-        <div class="row"><ngb-rating rate="{{book.rating}}" readonly="true" max="5"></ngb-rating></div>
+        <div class="row"><ngb-rating rate="{{cart.products[i].rating}}" readonly="true" max="5"></ngb-rating></div>
       </div>
       <div class="col">
         <div class="row">
           <div class="panel panel-default details-panel">
             <div class="panel-heading">About</div>
             <div class="panel-body details-panel-body">
-              <div class="row">Author: {{book.author}}</div>
-              <div class="row">Release Date: {{book.releaseDate | date:'mediumDate'}}</div>
-              <div class="row">Price: {{book.price | currency}}</div>
+              <div class="row">Author: {{cart.products[i].author}}</div>
+              <div class="row">Release Date: {{cart.products[i].releaseDate | date:'mediumDate'}}</div>
+              <div class="row">Price: {{cart.products[i].price | currency}}</div>
             </div>
           </div>
         </div>
@@ -32,39 +32,39 @@
         </div>
       </div>
     </div>
-    <!--<div class="row">
+    <div class="row">
       <button type="button" class="btn btn-remove buy-button" (click)="removeFromCart(book)">Remove</button>
-    </div>-->
+    </div>
   </div>
   <div class="row">Total Price: {{cart.totalPrice | currency}}</div>
   <div class="row"><h1>Saved For Later</h1></div>
   <div *ngFor="let product of cart.savedForLater">
-    <div class="row"><h1>{{book.title}}</h1></div>
+    <div class="row"><h1>{{cart.products[i].title}}</h1></div>
     <div class="row">
       <div class="col">
         <div class="row image-container">
-          <img class="book-image" src="{{book.imageUrl}}" />
+          <img class="book-image" src="{{cart.products[i].imageUrl}}" />
           <img *ngIf="book.topSeller" class="top-seller" src="assets/img/top-seller.png" />
         </div>
-        <div class="row"><ngb-rating rate="{{book.rating}}" readonly="true" max="5"></ngb-rating></div>
+        <div class="row"><ngb-rating rate="{{cart.products[i].rating}}" readonly="true" max="5"></ngb-rating></div>
       </div>
       <div class="col">
         <div class="row">
           <div class="panel panel-default details-panel">
             <div class="panel-heading">About</div>
             <div class="panel-body details-panel-body">
-              <div class="row">Author: {{book.author}}</div>
-              <div class="row">Release Date: {{book.releaseDate | date:'mediumDate'}}</div>
-              <div class="row">Price: {{book.price | currency}}</div>
+              <div class="row">Author: {{cart.products[i].author}}</div>
+              <div class="row">Release Date: {{cart.products[i].releaseDate | date:'mediumDate'}}</div>
+              <div class="row">Price: {{cart.products[i].price | currency}}</div>
             </div>
           </div>
         </div>
-        <!--<div class="row"> Add to Cart
+        <div class="row"> Add to Cart
           <button type="button" class="btn btn-add buy-button" (click)="addProduct(book)">Add 1 More</button>
         </div>
         <div class="row"> Remove from Saved for Later
           <button type="button" class="btn btn-remove buy-button" (click)="removeProduct(book)">Remove</button>
-        </div>-->
+        </div>
       </div>
     </div>
   </div>
