@@ -12,11 +12,11 @@ namespace AspNetCoreDemoApp.Models
     {
         public string Id { get; set; }
 
-        [FirestoreProperty(name: "cart")]
-        public List<Book> Products { get; set; }
+        [FirestoreProperty(name: "products")]
+        public Book[] Products { get; set; }
 
         [FirestoreProperty(name: "savedForLater")]
-        public List<Book> SavedForLater { get; set; }
+        public Book[] SavedForLater { get; set; }
 
         [FirestoreProperty(name: "totalPrice")]
         public int TotalPrice { get; set; }
