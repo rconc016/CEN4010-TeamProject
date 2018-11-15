@@ -17,7 +17,7 @@ const httpOptions = {
 @Injectable()
 export class UserService {
 
-  url:string = `${environment.apiUrl}/user/`
+  private readonly url = `${environment.apiUrl}/user`
 
   constructor(
    public db: AngularFirestore,
@@ -27,11 +27,11 @@ export class UserService {
  }
 
   getUser(id : string):Observable<FirebaseUserModel> {
-    return this.http.get<FirebaseUserModel>(this.url + id);
+    return this.http.get<FirebaseUserModel>(`${this.url}/${id}`);
   }
 
   updateUser(user : FirebaseUserModel):Observable<FirebaseUserModel> {
-    return this.http.put<FirebaseUserModel>(this.url + user.id, user, httpOptions);
+    return this.http.put<FirebaseUserModel>(`${this.url}/${user.id}`, user, httpOptions);
   }
 
   getCurrentUser() {
@@ -56,5 +56,15 @@ export class UserService {
         resolve(res);
       }, err => reject(err));
     });
+  }
+
+  isPasswordValid(password: string) {
+    let config = {
+      params: {
+        password: password
+      }
+    };
+
+    return this.http.get<boolean>(`${this.url}/validate/password`, config);
   }
 }

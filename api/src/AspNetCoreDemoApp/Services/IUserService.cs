@@ -31,5 +31,12 @@ namespace AspNetCoreDemoApp.Services
         /// </summary>
         /// <param name="userId">The ID of the user to look for.</param>
         User FindById(string userId);
+
+        /// <summary>
+        /// Determines whether the given password is valid or not.
+        /// </summary>
+        /// <param name="password">The password string to be validated.</param>
+        /// <returns>True if the password is valid, false otherwise.</returns>
+        bool IsPasswordValid(string password);
     }
 }

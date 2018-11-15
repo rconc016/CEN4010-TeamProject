@@ -23,33 +23,33 @@ export class LoginComponent {
 
   createForm() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required ],
+      email: ['', Validators.required],
       password: ['',Validators.required]
     });
   }
 
-  tryFacebookLogin(){
+  tryFacebookLogin() {
     this.authService.doFacebookLogin()
     .then(res => {
       this.router.navigate(['/user']);
     })
   }
 
-  tryTwitterLogin(){
+  tryTwitterLogin() {
     this.authService.doTwitterLogin()
     .then(res => {
       this.router.navigate(['/user']);
     })
   }
 
-  tryGoogleLogin(){
+  tryGoogleLogin() {
     this.authService.doGoogleLogin()
     .then(res => {
       this.router.navigate(['/user']);
     })
   }
 
-  tryLogin(value){
+  tryLogin(value) {
     this.authService.doLogin(value)
     .then(res => {
       this.router.navigate(['/user']);

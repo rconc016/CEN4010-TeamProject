@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '../core/auth.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../core/user.service';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent {
 
+  private static readonly userUrlRoute = ['/user'];
+
   registerForm: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
@@ -17,54 +20,64 @@ export class RegisterComponent {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) {
     this.createForm();
-   }
+  }
 
-   createForm() {
-     this.registerForm = this.fb.group({
-       email: ['', Validators.required ],
-       password: ['',Validators.required]
-     });
-   }
+  createForm() {
+    this.registerForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
-   tryFacebookLogin(){
-     this.authService.doFacebookLogin()
-     .then(res =>{
-       this.router.navigate(['/user']);
-     }, err => console.log(err)
-     )
-   }
+  tryFacebookLogin() {
+    this.authService.doFacebookLogin()
+    .then(res =>{
+      this.router.navigate(RegisterComponent.userUrlRoute);
+    }, err => console.log(err)
+    )
+  }
 
-   tryTwitterLogin(){
-     this.authService.doTwitterLogin()
-     .then(res =>{
-       this.router.navigate(['/user']);
-     }, err => console.log(err)
-     )
-   }
+  tryTwitterLogin() {
+    this.authService.doTwitterLogin()
+    .then(res =>{
+      this.router.navigate(RegisterComponent.userUrlRoute);
+    }, err => console.log(err)
+    )
+  }
 
-   tryGoogleLogin(){
-     this.authService.doGoogleLogin()
-     .then(res =>{
-       this.router.navigate(['/user']);
-     }, err => console.log(err)
-     )
-   }
+  tryGoogleLogin() {
+    this.authService.doGoogleLogin()
+    .then(res =>{
+      this.router.navigate(RegisterComponent.userUrlRoute);
+    }, err => console.log(err)
+    )
+  }
 
-   tryRegister(value){
-     this.authService.doRegister(value)
-     .then(res => {
-       console.log(res);
-       this.errorMessage = "";
-       this.successMessage = "Your account has been created";
-       this.router.navigate(['/user']);
-     }, err => {
-       console.log(err);
-       this.errorMessage = err.message;
-       this.successMessage = "";
-     })
-   }
+  async tryRegister(value) {
+    let passwordForm = this.registerForm.get('password');
+    let result = await this.userService.isPasswordValid(passwordForm.value).toPromise();
 
+    if (!passwordForm.valid || !result) {
+      this.errorMessage = "Password not valid";
+      this.successMessage = '';
+
+      return;
+    }
+
+    this.authService.doRegister(value)
+    .then(res => {
+      console.log(res);
+      this.errorMessage = '';
+      this.successMessage = "Your account has been created";
+      this.router.navigate(RegisterComponent.userUrlRoute);
+    }, err => {
+      console.log(err);
+      this.errorMessage = err.message;
+      this.successMessage = '';
+    })
+  }
 }
