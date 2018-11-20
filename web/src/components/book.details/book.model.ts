@@ -4,6 +4,7 @@ export class Book implements BookInterface {
     id: string;
     title: string;
     author: string;
+    authorId: string;
     price: number;
     rating: number;
     releaseDate: Date;

@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookResolver } from '../components/book/book.resolver';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { BookDetailsComponent } from '../components/book.details/book.details.component';
+import { AuthorComponent } from '../components/author/author.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BookDetailsComponent } from '../components/book.details/book.details.co
     RegisterComponent,
     BookComponent,
     BookDetailsComponent,
-    NavbarComponent
+    NavbarComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,

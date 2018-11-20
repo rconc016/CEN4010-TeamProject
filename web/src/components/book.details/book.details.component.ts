@@ -11,33 +11,12 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./book.details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-  private readonly useTestData = false;
-
   public id: string;
   public book: Book;
 
   public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder) { 
-    this.book = this.useTestData ? this.getTestData() : this.getData();
+    this.book = this.route.snapshot.data.bookResolver as BookInterface;
   }
-
-  private getTestData() {
-    this.book = {
-			id: "testID",
-			title: "The Adventures of Roelar",
-			author: "Ron Con",
-			genre: "Fantasy",
-			price: 9.99,
-			rating: 4,
-			releaseDate: new Date(2018, 9, 10),
-			topSeller: true,
-			imageUrl: "https://images-na.ssl-images-amazon.com/images/I/919-FLL37TL.jpg"
-		}	
-    return this.book;
-  }
-
-  private getData() {
-    return this.route.snapshot.data.bookResolver as BookInterface;
-  } 
 
   public navigateToBrowserPage() {
     this.router.navigate(['book']);
