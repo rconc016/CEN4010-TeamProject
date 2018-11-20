@@ -1,0 +1,15 @@
+<div class="container-fluid main-container">
+  <div class="row">
+    <div class="col text-right">
+      <img class="author-image" src="{{author.imageUrl}}" alt="">
+    </div>
+    <div class="col info-col">
+      <h1 class="author-name">{{getAuthorFullName()}}</h1>
+      <hr>
+      <h2 class="author-biography-label">Biography</h2>
+      <p>{{author.bio}}</p>
+      <br>
+      <a class="books-link" [href]="'book?author=' + getAuthorFullName()">See all books by this author</a>
+    </div>
+  </div>
+</div>
