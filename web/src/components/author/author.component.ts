@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./author.component.css']
 })
 export class AuthorComponent implements OnInit {
-  private author: Author;
+  public author: Author;
 
   public constructor(private route: ActivatedRoute) { 
     this.author = this.route.snapshot.data.authorResolver as Author
