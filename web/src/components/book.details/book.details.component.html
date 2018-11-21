@@ -17,9 +17,13 @@
             <div class="row">Release Date: {{book.releaseDate | date:'mediumDate'}}</div>
             <div class="row">Genre: {{book.genre}}</div>
             <div class="row">Price: {{book.price | currency}}</div>
+            <div class="row">Description:</div>
           </div>
         </div>
       </div>
+      <h2 class="book-description-label">Description</h2>
+      <p>{{bookDescription.description}}</p>
+      <br>
       <div class="row">
         <button type="button" class="btn btn-success buy-button" disabled>Purchase</button>
       </div>
