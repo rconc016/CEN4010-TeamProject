@@ -29,6 +29,9 @@ import { BookDetailsComponent } from '../components/book.details/book.details.co
 import { CartComponent } from '../components/cart/cart.component';
 import { CartResolver } from '../components/cart/cart.resolver';
 import { CartService } from '../components/core/cart.service';
+import { CardNumValidDirective } from './card-num-valid.directive';
+import { CardExpDateValidDirective } from './card-exp-date-valid.directive';
+import { CardCvcValidDirective } from './card-cvv-valid.directive';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { CartService } from '../components/core/cart.service';
     BookDetailsComponent,
     NavbarComponent,
     BookComponent,
-    CartComponent
+    CartComponent,
+    CardNumValidDirective,
+    CardExpDateValidDirective,
+    CardCvcValidDirective
   ],
   imports: [
     BrowserModule,
