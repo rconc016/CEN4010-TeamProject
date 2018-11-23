@@ -24,7 +24,7 @@ import { AuthGuard } from '../components/core/auth.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookResolver } from '../components/book/book.resolver';
 import { NavbarComponent } from '../components/navbar/navbar.component';
-import { BookDetailsComponent } from '../components/book.details/book.details.component';
+import { BookDetailsComponent, DetailsDataDialog } from '../components/book.details/book.details.component';
 import { AuthorComponent } from '../components/author/author.component';
 
 @NgModule({
@@ -37,7 +37,8 @@ import { AuthorComponent } from '../components/author/author.component';
     BookDetailsComponent,
     NavbarComponent,
     AuthorComponent,
-	DialogDataDialog
+	DialogDataDialog,
+	DetailsDataDialog
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,8 @@ import { AuthorComponent } from '../components/author/author.component';
   providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver],
   bootstrap: [AppComponent],
   entryComponents: [
-	DialogDataDialog
+	DialogDataDialog,
+	DetailsDataDialog
   ]
 })
 export class AppModule { }
