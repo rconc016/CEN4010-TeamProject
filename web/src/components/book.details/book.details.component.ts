@@ -6,7 +6,7 @@ import { BookInterface } from './book.interface';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../core/user.service';
 import { CartComponent } from '../cart/cart.component';
-import { UserComponent } from '../user/user.component';
+import { FirebaseUserModel } from '../core/user.model';
 
 @Component({
   selector: 'app-book',
@@ -18,9 +18,10 @@ export class BookDetailsComponent implements OnInit {
 
   public id: string;
   public book: Book;
+  public user: FirebaseUserModel;
 
   public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-    private userService : UserService, private cartComponent : CartComponent, private userComponent: UserComponent) { 
+    private userService : UserService, private cartComponent : CartComponent) { 
     this.book = this.useTestData ? this.getTestData() : this.getData();
   }
 
@@ -48,19 +49,31 @@ export class BookDetailsComponent implements OnInit {
   }
 
   public addToCart(product: Book) {
-    console.log("hello");
-    console.log(this.userComponent.user);
-    this.userComponent.getUser();
-    console.log("hello2");
-    console.log(this.userComponent.user)
-    if (this.userComponent.user == null) {
+    console.log(this.user);
+    if (this.user.id == "") {
       this.router.navigate(['login']);
     }
 
-    this.cartComponent.addProduct(product);
+    this.cartComponent.addProduct(product, this.user.id);
     
   }
 
   public ngOnInit() {
+    this.user = new FirebaseUserModel();
+    console.log(this.user);
+    this.userService.getUser(this.user.id)
+        .subscribe((data: FirebaseUserModel) => this.user = { 
+          billingAddress: data['billingAddress'],
+          email: data['email'],
+          firstName: data['firstName'],
+          id: data['id'],
+          lastName: data['lastName'],
+          nickname: data['nickname'],
+          shippingAddress : data['shippingAddress'],
+          provider: data['provider'],
+          image: data['image'],
+          name: data['name'],
+          creditCards: data['creditCards']
+        });
   }
 }

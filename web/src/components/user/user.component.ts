@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import * as Payment from 'payment';
   templateUrl: 'user.component.html',
   styleUrls: ['user.scss']
 })
+
 export class UserComponent implements OnInit {
   user: FirebaseUserModel;
   profileForm: FormGroup;
@@ -131,6 +132,7 @@ export class UserComponent implements OnInit {
   }
 
   getUser() {
+    console.log(this.user.id);
     this.userService.getUser(this.user.id)
         .subscribe((data: FirebaseUserModel) => this.user = { 
           billingAddress: data['billingAddress'],
@@ -154,4 +156,5 @@ export class UserComponent implements OnInit {
         this.router.navigate(['/book']);
     })
   }
+  
 }

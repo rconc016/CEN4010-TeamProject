@@ -19,19 +19,18 @@ export class CartComponent implements OnInit {
   messageDescription = "Please add items to cart";
 
   constructor(
-    private cartService: CartService,
+    private cartService: CartService
   ) {
+    this.cart = new FirebaseCartModel;
   }
 
   ngOnInit(): void {
-    this.getCart();
+  
   }
 
-  addProduct(product: Book) {
-    this.getCart();
+  addProduct(product: Book, userId:string) {
 
     this.cartService.addToCart(this.cart, product);
-
     this.getCart();
   }
 

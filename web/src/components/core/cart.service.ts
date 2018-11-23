@@ -31,9 +31,9 @@ export class CartService {
 
   // Adding new Product to cart db 
   addToCart(cart: FirebaseCartModel, product: Book): void {
-
     cart.products.push(product);
-    this.updateCart(cart);
+    this.updateCart(cart).subscribe(res => {});
+    console.log(cart);
     this.successAdd;
 
   }

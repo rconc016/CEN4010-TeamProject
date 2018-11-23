@@ -25,9 +25,9 @@ namespace AspNetCoreDemoApp.Controllers
         /// <param name="cartId"></param>
         /// <returns>The user with the corresponding ID.</returns>
         [HttpGet("{cartId}")]
-        public ActionResult<Cart> Get(string userId)
+        public ActionResult<Cart> Get(string cartId)
         {
-            Cart cart = cartService.FindById(userId);
+            Cart cart = cartService.FindById(cartId);
             if (cart == null)
             {
                 return NotFound();
@@ -37,16 +37,16 @@ namespace AspNetCoreDemoApp.Controllers
         }
 
         [HttpPut("{cartId}")]
-        public ActionResult Put(string userId, [FromBody]Cart cartData)
+        public ActionResult Put(string cartId, [FromBody]Cart cartData)
         {
-            Cart cart = cartService.FindById(userId);
+            Cart cart = cartService.FindById(cartId);
             if (cart == null)
             {
-                cartService.Create(userId, cartData);
+                cartService.Create(cartId, cartData);
             }
             else
             {
-                cartService.Update(userId, cartData);
+                cartService.Update(cartId, cartData);
             }
 
             return Ok();
