@@ -51,9 +51,9 @@
             <div class="form-group">
               <label for="password">New Password</label>
               <input type="text" class="form-control" id="password"
-                     [(ngModel)]="user.password" name="password"
+                     [(ngModel)]="user.password" name="password" ng-pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$"
                      #password="ngModel">
-              <label class="error">{{errorMessagePassword}}</label>
+              <label class="error">{{errorMessagePassword}} <br /> </label>
               <label class="success">{{successMessagePassword}}</label>
               <button type="button" (click)="updatePassword(password.value)" class="btn btn-link">Change Password</button>
             </div>
@@ -67,12 +67,16 @@
                 Billing Address is required
               </div>
             </div>      
-            <div *ngFor="let shippingAddress of user.shippingAddress, let i=index">
+            <div *ngFor="let shippingAddress of user.shippingAddress, let i=index, trackBy:customTrackBy">
               <div class="form-group">
                 <label for="shippingAddress">Shipping Address {{i+1}}</label>
                 <input type="text" class="form-control" id="shippingAddress"
+                       required
                        [(ngModel)]="user.shippingAddress[i]" name="shippingAddress{{i}}"
                        #shipping="ngModel">
+                <div [hidden]="shipping.valid || shipping.pristine" class="alert alert-danger">
+                  Invalid Shipping Address
+                </div>
                 <button type="button" (click)="removeShippingAddress(user.shippingAddress[i])" class="btn btn-link">Remove</button>
               </div>
             </div>
@@ -80,30 +84,32 @@
               <button type="button" (click)="addShippingAddress()">+ add Shipping Address</button>
             </div>
             <br />
-            <div *ngFor="let creditCard of user.creditCards, let i=index">
+            <div *ngFor="let creditCard of user.creditCards, let i=index, trackBy:customTrackBy">
               <div class="form-group">
                 <label for="creditCards">Credit Card {{i+1}}</label>
-                <!--<input type="tel" class="form-control" [(ngModel)]="user.creditCards[i].cardName" name="cardName{{i}}"
-                       [formControl]="profileForm.controls.cardName" placeholder="Name on Credit Card" id="cc-name">
-                <div [hidden]="profileForm.controls.cardName.valid || profileForm.controls.cardName.pristine" class="alert alert-danger">
+                <input type="tel" class="form-control" [(ngModel)]="creditCard.cardName" name="cardName{{i}}"
+                       #cardName="ngModel" placeholder="Name on Credit Card" id="cc-name" ng-minlength="2" required>
+                <div [hidden]="cardName.valid || cardName.pristine" class="alert alert-danger">
                   Invalid Name
-                </div>-->
-                <input type="tel" class="form-control" name="cardNumber{{i}}" 
-                       [formControl]="profileForm.controls.cardNumber" placeholder="Credit Card Number" autocomplete="cc-number" id="cc-number" ccNum
-                       [ngClass]="{invalid: !user.creditCards[i].cardNumber.valid}">
-                <div [hidden]="profileForm.controls.cardNumber.valid || profileForm.controls.cardNumber.pristine" class="alert alert-danger">
+                </div>
+                <input type="tel" class="form-control" [(ngModel)]="creditCard.cardNumber" name="cardNumber{{i}}" 
+                       #cardNumber="ngModel" placeholder="Credit Card Number" autocomplete="cc-number" id="cc-number"
+                       ccNum required cardNumValid>
+                <div [hidden]="cardNumber.valid || cardNumber.pristine" class="alert alert-danger">
                   Invalid Number
                 </div>
-                <!--<input type="tel" class="form-control" [(ngModel)]="user.creditCards[i].expirationDate" name="cardExpDate{{i}}"
-                       [formControl]="profileForm.controls.cardExpDate" placeholder="Credit Card Expiration Date" autocomplete="cc-exp" id="cc-exp" ccExp>
-                <div [hidden]="profileForm.controls.cardExpDate.valid || profileForm.controls.cardExpDate.pristine" class="alert alert-danger">
+                <input type="tel" class="form-control" [(ngModel)]="creditCard.expirationDate" name="cardExpDate{{i}}"
+                       #cardExpDate="ngModel" placeholder="Credit Card Expiration Date" autocomplete="cc-exp" id="cc-exp"
+                       ccExp required cardExpDateValid>
+                <div [hidden]="cardExpDate.valid || cardExpDate.pristine" class="alert alert-danger">
                   Invalid Expiration Date
                 </div>
-                <input type="tel" class="form-control" [(ngModel)]="user.creditCards[i].cvc" name="cardCvv{{i}}"
-                       [formControl]="profileForm.controls.cardCvv" placeholder="Credit Card CVV" autocomplete="cc-cvc" id="cc-csc" ccCvc>
-                <div [hidden]="profileForm.controls.cardCvv.valid || profileForm.controls.cardCvv.pristine" class="alert alert-danger">
+                <input type="tel" class="form-control" [(ngModel)]="user.creditCards[i].cvc" name="cardCvc{{i}}"
+                       #cardCvc="ngModel" placeholder="Credit Card CVC" autocomplete="cc-cvc" id="cc-csc"
+                       ccCvc required cardCvcValid>
+                <div [hidden]="cardCvc.valid || cardCvc.pristine" class="alert alert-danger">
                   Invalid CVV
-                </div>-->
+                </div>
                 <button type="button" (click)="removeCreditCard(user.creditCards[i].cardNumber)" class="btn btn-link">Remove</button>
               </div>
             </div>
