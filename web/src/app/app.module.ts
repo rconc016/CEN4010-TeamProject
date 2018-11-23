@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/login/login.component';
 import { UserComponent } from '../components/user/user.component';
 import { RegisterComponent } from '../components/register/register.component';
-import { BookComponent } from '../components/book/book.component';
+import { BookComponent, DialogDataDialog } from '../components/book/book.component';
 import { environment } from '../environments/environment';
 import { AuthService } from '../components/core/auth.service';
 import { UserService } from '../components/core/user.service';
@@ -36,7 +36,8 @@ import { AuthorComponent } from '../components/author/author.component';
     BookComponent,
     BookDetailsComponent,
     NavbarComponent,
-    AuthorComponent
+    AuthorComponent,
+	DialogDataDialog
   ],
   imports: [
     BrowserModule,
@@ -53,6 +54,9 @@ import { AuthorComponent } from '../components/author/author.component';
 	MaterialModule
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+	DialogDataDialog
+  ]
 })
 export class AppModule { }
