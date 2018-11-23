@@ -88,7 +88,7 @@
               <div class="form-group">
                 <label for="creditCards">Credit Card {{i+1}}</label>
                 <input type="tel" class="form-control" [(ngModel)]="creditCard.cardName" name="cardName{{i}}"
-                       #cardName="ngModel" placeholder="Name on Credit Card" id="cc-name" ng-minlength="2" required>
+                       #cardName="ngModel" placeholder="Name on Credit Card" id="cc-name" minlength="2" required>
                 <div [hidden]="cardName.valid || cardName.pristine" class="alert alert-danger">
                   Invalid Name
                 </div>
