@@ -13,13 +13,17 @@
         <div class="panel panel-default details-panel"> 
           <div class="panel-heading">About</div>
           <div class="panel-body details-panel-body">
-            <div class="row">Author: <a [href]="'book?author=' + book.author">{{book.author}}</a></div>
+            <div class="row">Author: <a [href]="'author/' + book.authorId">{{book.author}}</a></div>
             <div class="row">Release Date: {{book.releaseDate | date:'mediumDate'}}</div>
             <div class="row">Genre: {{book.genre}}</div>
             <div class="row">Price: {{book.price | currency}}</div>
+            <div class="row">Description:</div>
           </div>
         </div>
       </div>
+      <h2 class="book-description-label">Description</h2>
+      <p>{{bookDescription.description}}</p>
+      <br>
       <div class="row">
         <button type="button" class="btn btn-success buy-button" (click)="addToCart(book)">Add to Cart</button>
       </div>

@@ -18,6 +18,7 @@ namespace AspNetCoreDemoApp
                 .AddSingleton<IFilterService, FilterService>()
                 .AddScoped<IBookService, BookService>()
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<IAuthorService, AuthorService>()
                 .AddScoped<ICartService, CartService>()
                 .AddMvcCore()
                 .AddCors()

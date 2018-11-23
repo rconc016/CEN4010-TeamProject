@@ -1,0 +1,26 @@
+.main-container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.author-image {
+    width: 50%;
+}
+
+.author-name {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+}
+
+.info-col {
+    margin-left: 5%;
+}
+
+.author-biography-label {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.books-link {
+    font-size: 1vw;
+}

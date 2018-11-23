@@ -32,6 +32,7 @@ import { CartService } from '../components/core/cart.service';
 import { CardNumValidDirective } from './card-num-valid.directive';
 import { CardExpDateValidDirective } from './card-exp-date-valid.directive';
 import { CardCvcValidDirective } from './card-cvv-valid.directive';
+import { AuthorComponent } from '../components/author/author.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,8 @@ import { CardCvcValidDirective } from './card-cvv-valid.directive';
     CardNumValidDirective,
     CardExpDateValidDirective,
     CardCvcValidDirective
+    NavbarComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,

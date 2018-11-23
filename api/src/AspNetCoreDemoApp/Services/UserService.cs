@@ -1,23 +1,23 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Text.RegularExpressions;
 using AspNetCoreDemoApp.Models;
-using AspNetCoreDemoApp.Services;
-using Google.Cloud.Firestore;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreDemoApp.Services
 {
     public class UserService : IUserService
     {
         private const string CollectionId = "user";
+        private const string PasswordPattern = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$";
 
-        public IFirestoreService firestoreService;
+        private IFirestoreService firestoreService;
+        private Regex passwordRegex;
 
         public UserService(IFirestoreService firestoreService)
         {
             this.firestoreService = firestoreService;
+
+            passwordRegex = new Regex(PasswordPattern);
         }
 
         public void Create(string userId, User userData)
@@ -38,6 +38,17 @@ namespace AspNetCoreDemoApp.Services
         public User FindById(string userId)
         {
             return firestoreService.FindById<User>(CollectionId, userId);
+        }
+
+        public bool IsPasswordValid(string password)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                return false;
+            }
+
+            MatchCollection matches = passwordRegex.Matches(password);
+            return matches.Count > 0;            
         }
     }
 }

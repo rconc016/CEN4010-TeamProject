@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {ActivatedRoute, RouterStateSnapshot} from "@angular/router";
 import { Book } from './book.model';
 import { BookInterface } from './book.interface';
+import { BookDescription } from './book.description.model';
+import { BookService } from '../../services/book/book.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../core/user.service';
 import { CartComponent } from '../cart/cart.component';
@@ -14,11 +16,10 @@ import { FirebaseUserModel } from '../core/user.model';
   styleUrls: ['./book.details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-  private readonly useTestData = false;
-
   public id: string;
   public book: Book;
   public user: FirebaseUserModel;
+  public bookDescription: BookDescription;
 
   public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
     private userService : UserService, private cartComponent : CartComponent) { 
