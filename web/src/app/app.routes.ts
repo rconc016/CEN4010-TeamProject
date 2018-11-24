@@ -8,15 +8,22 @@ import { BookDetailsComponent } from '../components/book.details/book.details.co
 import { BookDetailsResolver } from '../components/book.details/book.details.resolver';
 import { BookComponent } from '../components/book/book.component';
 import { BookResolver } from '../components/book/book.resolver';
+import { CartComponent } from '../components/cart/cart.component';
+import { CartResolver } from '../components/cart/cart.resolver';
 import { AuthorComponent } from '../components/author/author.component';
 import { AuthorResolver } from '../components/author/author.resolver';
 
+
 export const rootRouterConfig: Routes = [
+  { path: '', redirectTo: 'book', pathMatch: 'full' },
+  //{ path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', redirectTo: 'book', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent,  resolve: { data: UserResolver} },
   { path: 'book', component: BookComponent, resolve: { bookResolver: BookResolver } },
+  { path: 'book/:id', component: BookDetailsComponent, resolve: { bookResolver: BookDetailsResolver } },
+  { path: 'cart', component: CartComponent, resolve: { cartResolver: CartResolver}},
   { path: 'book/:id', component: BookDetailsComponent, resolve: { bookResolver: BookDetailsResolver } },
   { path: 'author/:id', component: AuthorComponent, resolve: { authorResolver: AuthorResolver }},
 ];

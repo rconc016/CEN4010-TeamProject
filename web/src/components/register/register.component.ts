@@ -26,12 +26,12 @@ export class RegisterComponent {
     this.createForm();
   }
 
-  createForm() {
-    this.registerForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
+   createForm() {
+     this.registerForm = this.fb.group({
+       email: ['', Validators.required ],
+       password: ['', Validators.required ]
+     });
+   }
 
   tryFacebookLogin() {
     this.authService.doFacebookLogin()

@@ -19,6 +19,7 @@ namespace AspNetCoreDemoApp
                 .AddScoped<IBookService, BookService>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IAuthorService, AuthorService>()
+                .AddScoped<ICartService, CartService>()
                 .AddMvcCore()
                 .AddCors()
                 .AddJsonFormatters();

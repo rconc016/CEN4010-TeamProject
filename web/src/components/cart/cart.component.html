@@ -1,0 +1,48 @@
+<!--
+  <img *ngIf="cart.products[i].topSeller" class="top-seller" src="assets/img/top-seller.png" />
+-->
+<div class="container-fluid">
+  <div>
+    <h1>Shopping Cart</h1>
+  </div>
+  <div class="row">
+    <div *ngFor="let product of cart.products, let i=index" class="col col-sm-12 card" style="padding-top: .5em; padding-bottom: .5em">
+      <div class="row">
+        <div class="col-sm-2">
+          <h4>{{cart.products[i].title}}</h4>
+          <img class="img-fluid" src="{{cart.products[i].imageUrl}}" style="width:120px; height:140px;" />
+        </div>
+        <div class="col-sm-3">
+          <br>
+          <br>
+          <div>{{cart.products[i].id}}</div>
+          <div>Author: {{cart.products[i].author}}</div>
+          <div>Release Date: {{cart.products[i].releaseDate | date:'mediumDate'}}</div>
+          <div>Price: {{cart.products[i].price | currency}}</div>
+          <div ><ngb-rating rate="{{cart.products[i].rating}}" readonly="true" max="5"></ngb-rating></div>
+        </div>
+        <div class="col-sm-3">
+            <br>
+            <br>
+            <button style="margin-left: 1em;" type="button" class="btn btn-success buy-button" (click)="addProduct(cart.products[i])">Add 1 More</button>
+            <button style="margin-left: 1em;" type="button" class="btn btn-success buy-button" (click)="removeProduct(cart.products[i])">Remove</button>
+            <button style="margin-left: 1em;" type="button" class="btn btn-success buy-button" (click)="saveProduct(cart.products[i])">Save For Later</button>
+        </div>
+      </div>
+    </div>
+    <h4 style=" margin-left: 1em; margin-top: 2em;">Total Price: {{cart.totalPrice | currency}}</h4>
+    <button style="margin-top: 1em; margin-left: 1em;" type="button" class="btn btn-success buy-button" (click)="purchase()">Purchase</button>
+  </div>
+  <div *ngIf="cart.savedForLater.length > 0">
+    <div>
+        <h4>Saved For Later</h4>
+      </div>
+      <div class="row">
+        <div *ngFor="let saved of cart.savedForLater, let i=index" class="col-sm-1" style="padding-top: .5em; padding-bottom: .5em">
+          <img class="img-fluid" src="{{cart.savedForLater[i].imageUrl}}" style="width:120px; height:140px;" />
+          <button style="margin-top: 1em;" type="button" class="btn btn-success buy-button w-100" (click)="removeSaved(cart.savedForLater[i])">Remove</button>
+        </div>
+      </div>
+  </div>
+  
+</div>

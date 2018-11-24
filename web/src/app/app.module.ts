@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { NgXCreditCardsModule } from 'ngx-credit-cards';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/login/login.component';
@@ -24,6 +25,12 @@ import { AuthGuard } from '../components/core/auth.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookResolver } from '../components/book/book.resolver';
 import { NavbarComponent } from '../components/navbar/navbar.component';
+import { CartComponent } from '../components/cart/cart.component';
+import { CartResolver } from '../components/cart/cart.resolver';
+import { CartService } from '../components/core/cart.service';
+import { CardNumValidDirective } from './card-num-valid.directive';
+import { CardExpDateValidDirective } from './card-exp-date-valid.directive';
+import { CardCvcValidDirective } from './card-cvv-valid.directive';
 import { BookDetailsComponent, DetailsDataDialog } from '../components/book.details/book.details.component';
 import { AuthorComponent } from '../components/author/author.component';
 
@@ -36,14 +43,21 @@ import { AuthorComponent } from '../components/author/author.component';
     BookComponent,
     BookDetailsComponent,
     NavbarComponent,
-    AuthorComponent,
-	DialogDataDialog,
-	DetailsDataDialog
+    BookComponent,
+    CartComponent,
+    CardNumValidDirective,
+    CardExpDateValidDirective,
+    CardCvcValidDirective,
+    NavbarComponent,
+    AuthorComponent
+	  DialogDataDialog,
+	  DetailsDataDialog
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -51,14 +65,15 @@ import { AuthorComponent } from '../components/author/author.component';
     NgbModule,
     FormsModule,
     ScrollEventModule,
-	BrowserAnimationsModule,
-	MaterialModule
+	  BrowserAnimationsModule,
+    MaterialModule,
+    NgXCreditCardsModule
   ],
-  providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver],
-  bootstrap: [AppComponent],
+  providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver, CartComponent, CartService, CartResolver, UserComponent],
+  bootstrap: [AppComponent]
   entryComponents: [
-	DialogDataDialog,
-	DetailsDataDialog
+	    DialogDataDialog,
+	    DetailsDataDialog
   ]
 })
 export class AppModule { }
