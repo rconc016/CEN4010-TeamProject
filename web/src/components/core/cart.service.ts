@@ -32,26 +32,37 @@ export class CartService {
   // Adding new Product to cart db 
   addToCart(cart: FirebaseCartModel, product: Book): void {
     cart.products.push(product);
+
+    this.totalPrice(cart);
     this.updateCart(cart).subscribe(res => {});
-    console.log(cart);
-    this.successAdd;
 
   }
 
   // Removing product from cart
-  removeFromCart(cart: FirebaseCartModel, product: Book) {
+  removeFromCart(cart: FirebaseCartModel, product: Book){
 
     for (let i = 0; i < cart.products.length; i++) {
-      if (cart.products[i].id === product.id) {
+      if (cart.products[i].title === product.title) {
         cart.products.splice(i, 1);
         break;
-
       }
-
-      this.totalPrice(cart);
-      this.updateCart(cart);
     }
 
+    this.totalPrice(cart);
+    this.updateCart(cart).subscribe(res=>{});
+  }
+
+  removeSavedFromCart(cart: FirebaseCartModel, product: Book){
+
+    for (let i = 0; i < cart.savedForLater.length; i++) {
+      if (cart.savedForLater[i].title === product.title) {
+        cart.savedForLater.splice(i, 1);
+        break;
+      }
+    }
+
+    this.totalPrice(cart);
+    this.updateCart(cart).subscribe(res=>{});
   }
 
   // Save Product for Later
@@ -59,7 +70,6 @@ export class CartService {
 
     cart.savedForLater.push(product);
     this.removeFromCart(cart, product);
-    this.successSave;
     
   }
 
@@ -76,11 +86,11 @@ export class CartService {
 
   // Return Total Price of Cart
   totalPrice(cart: FirebaseCartModel) {
-   
+    cart.totalPrice = 0;
     for (let i = 0; i < cart.products.length; i++) {
-      cart.totalPrice = cart.totalPrice + cart.products[i].price; 
+      cart.totalPrice = (cart.totalPrice * 1) + (cart.products[i].price *1)
     }
-    
+
   }
 
 }
