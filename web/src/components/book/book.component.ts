@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { Router } from "@angular/router";
 import { ActivatedRoute, RouterStateSnapshot } from "@angular/router";
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -12,6 +12,11 @@ import { ScrollEvent } from 'ngx-scroll-event';
 import { PageCommand } from '../../common/models/pagecommand';
 import { TopSellerStatus } from '../../common/enums/topsellerstatus';
 import { BookFilterCommand } from '../../common/models/bookfiltercommand';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+
+export interface DialogData {
+	dialogImgUrl: string;
+}
 
 @Component({
   selector: 'app-book',
@@ -42,8 +47,10 @@ export class BookComponent implements OnInit {
   public minDateFilterValue: string;
   public maxDateFilterValue: string;
   public ratingFilterValue: number;
+  
+  dialogImgUrl: string;
 
-  public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private bookService: BookService) {
+  public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private bookService: BookService, public dialog: MatDialog) {
     this.bookSortingOptions = this.createSortingOptions();
     this.selectedSortingOption = this.bookSortingOptions[0];
     this.selectedSortingDirectionName = 'Ascending';
@@ -280,4 +287,22 @@ export class BookComponent implements OnInit {
     this.offset = 0;
     this.reloadBooksWithDefault(true);
   }
+  
+  
+  /**
+   * Opens dialog with enlarged book image
+   */
+  public openDialog(selectedBookImgUrl){
+	this.dialog.open(DialogDataDialog, {
+		data: { dialogImgUrl: selectedBookImgUrl }
+	});
+  }
+}
+
+@Component({
+  selector: 'dialog-data',
+  templateUrl: 'dialog-data.html',
+})
+export class DialogDataDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }

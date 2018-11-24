@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col">
       <div class="row image-container">
-        <img class="book-image" src="{{book.imageUrl}}"/>
+        <img class="book-image" (click)="openDialog(book.imageUrl)" src="{{book.imageUrl}}"/>
         <img *ngIf="book.topSeller" class="top-seller" src="assets/img/top-seller.png"/>
       </div>
       <div class="row"><ngb-rating rate="{{book.rating}}" readonly="true" max="5"></ngb-rating></div>
@@ -14,10 +14,10 @@
           <div class="panel-heading">About</div>
           <div class="panel-body details-panel-body">
             <div class="row">Author: <a [href]="'author/' + book.authorId">{{book.author}}</a></div>
+            <div class="row">Publisher: {{book.publisher}}</div>
             <div class="row">Release Date: {{book.releaseDate | date:'mediumDate'}}</div>
             <div class="row">Genre: {{book.genre}}</div>
             <div class="row">Price: {{book.price | currency}}</div>
-            <div class="row">Description:</div>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ export interface BookInterface {
     authorId: string;
     descriptionId: string;
     price: number;
+	publisher: string;
     rating: number;
     releaseDate: Date;
     genre: string;
