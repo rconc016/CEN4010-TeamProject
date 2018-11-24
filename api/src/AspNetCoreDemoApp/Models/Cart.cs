@@ -19,7 +19,7 @@ namespace AspNetCoreDemoApp.Models
         public Book[] SavedForLater { get; set; }
 
         [FirestoreProperty(name: "totalPrice")]
-        public int TotalPrice { get; set; }
+        public string TotalPrice { get; set; }
                 
     }
 }
