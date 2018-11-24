@@ -147,7 +147,7 @@
                 <mat-card-subtitle class="mat-card-author">by <a href="author/{{book.authorId}}">{{book.author}}</a></mat-card-subtitle>
               </mat-card-header>
               <mat-card-subtitle class="mat-card-price text-right">{{book.price | currency}}</mat-card-subtitle>
-              <img mat-card-image src="{{book.imageUrl}}" alt="Book image">
+              <img mat-card-image (click)="openDialog(book.imageUrl)" src="{{book.imageUrl}}" alt="Book image">
               <mat-card-actions>
                 <button mat-button (click)="selectBook(book)">Details</button>
                 <button class="pull-right" mat-button>Add to Cart</button>

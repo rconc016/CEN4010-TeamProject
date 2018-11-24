@@ -31,6 +31,9 @@ namespace AspNetCoreDemoApp.Models
         [FirestoreProperty(name: "price")]
         public string Price { get; set; }
 
+        [FirestoreProperty(name: "publisher")]
+        public string Publisher { get; set; }
+
         [FirestoreProperty(name: "rating")]
         public string Rating { get; set; }
 
