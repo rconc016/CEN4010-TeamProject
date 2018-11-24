@@ -21,7 +21,6 @@ export interface DialogData {
   styleUrls: ['./book.details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-  public id: string;
   public book: Book;
   public user: FirebaseUserModel;
   public bookDescription: BookDescription;
@@ -36,26 +35,7 @@ export class BookDetailsComponent implements OnInit {
         this.bookDescription = response;
       });
   }
-
-  private getTestData() {
-    this.book = {
-			id: "testID",
-			title: "The Adventures of Roelar",
-			author: "Ron Con",
-			genre: "Fantasy",
-			price: 9.99,
-			rating: 4,
-			releaseDate: new Date(2018, 9, 10),
-			topSeller: true,
-			imageUrl: "https://images-na.ssl-images-amazon.com/images/I/919-FLL37TL.jpg"
-		}	
-    return this.book;
-  }
-
-  private getData() {
-    return this.route.snapshot.data.bookResolver as BookInterface;
-  } 
-
+  
   public navigateToBrowserPage() {
     this.router.navigate(['book']);
   }

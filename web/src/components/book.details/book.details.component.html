@@ -7,6 +7,9 @@
         <img *ngIf="book.topSeller" class="top-seller" src="assets/img/top-seller.png"/>
       </div>
       <div class="row"><ngb-rating rate="{{book.rating}}" readonly="true" max="5"></ngb-rating></div>
+      <div class="row return-button-row">
+        <button type="button" class="btn btn-primary" (click)="navigateToBrowserPage()">Return</button>
+      </div>
     </div>
     <div class="col">
       <div class="row">
@@ -27,9 +30,9 @@
       <div class="row">
         <button type="button" class="btn btn-success buy-button" (click)="addToCart(book)">Add to Cart</button>
       </div>
+      <div class="row">
+        <div class="col"><app-reviews [bookId]="this.route.snapshot.params['id']"></app-reviews></div>
+      </div>
     </div>
-  </div>
-  <div class="row return-button-row">
-    <button type="button" class="btn btn-primary" (click)="navigateToBrowserPage()">Return</button>
   </div>
 </div>

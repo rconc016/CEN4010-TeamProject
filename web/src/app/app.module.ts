@@ -27,6 +27,7 @@ import { BookResolver } from '../components/book/book.resolver';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { CartComponent } from '../components/cart/cart.component';
 import { CartResolver } from '../components/cart/cart.resolver';
+import { ReviewsComponent } from '../components/reviews/reviews.component';
 import { CartService } from '../components/core/cart.service';
 import { CardNumValidDirective } from './card-num-valid.directive';
 import { CardExpDateValidDirective } from './card-exp-date-valid.directive';
@@ -43,13 +44,13 @@ import { AuthorComponent } from '../components/author/author.component';
     BookComponent,
     BookDetailsComponent,
     NavbarComponent,
-    BookComponent,
+    ReviewsComponent,
     CartComponent,
     CardNumValidDirective,
     CardExpDateValidDirective,
     CardCvcValidDirective,
     NavbarComponent,
-    AuthorComponent
+    AuthorComponent,
 	  DialogDataDialog,
 	  DetailsDataDialog
   ],
@@ -70,7 +71,7 @@ import { AuthorComponent } from '../components/author/author.component';
     NgXCreditCardsModule
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, BookResolver, CartComponent, CartService, CartResolver, UserComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
   entryComponents: [
 	    DialogDataDialog,
 	    DetailsDataDialog

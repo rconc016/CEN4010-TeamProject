@@ -1,0 +1,42 @@
+.comments-container {
+    padding-top: 2rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
+}
+
+.review-row {
+    width: 100%;
+}
+
+.review-label {
+    padding-left: 0rem;
+}
+
+.user {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.comment-date {
+    font-size: 1.2rem;
+}
+
+.no-reviews-label {
+    font-style: italic;
+}
+
+.submit-review-form {
+    width: 100%;
+}
+
+.submit-review-row {
+    margin-bottom: 4rem;
+}
+
+.checkbox-row {
+    padding-left: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 0rem;
+}
