@@ -1,15 +1,25 @@
 <div class="container-fluid main-container">
-  <div class="row"><h1>{{book.title}}</h1></div>
+  <div class="row">
+    <h1>{{book.title}}</h1>
+  </div>
   <div class="row">
     <div class="col">
       <div class="row image-container">
         <img class="book-image" (click)="openDialog(book.imageUrl)" src="{{book.imageUrl}}"/>
         <img *ngIf="book.topSeller" class="top-seller" src="assets/img/top-seller.png"/>
       </div>
-      <div class="row"><ngb-rating rate="{{book.rating}}" readonly="true" max="5"></ngb-rating></div>
-      <div class="row return-button-row">
-        <button type="button" class="btn btn-primary" (click)="navigateToBrowserPage()">Return</button>
-      </div>
+      <div class="row">
+        <div class="col-xs">
+          <ng-template #rating let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+            </span>
+          </ng-template>          
+          <ngb-rating rate="{{book.rating}}" [starTemplate]="rating" readonly="true" max="5"></ngb-rating>
+        </div>
+        <div class="col">
+          <button class="btn btn-link"><a href="{{router.url}}/rate">Rate It</a></button>
+        </div>
     </div>
     <div class="col">
       <div class="row">
@@ -32,6 +42,9 @@
       </div>
       <div class="row">
         <div class="col"><app-reviews [bookId]="this.route.snapshot.params['id']"></app-reviews></div>
+      </div>
+      <div class="row return-button-row">
+        <button type="button" class="btn btn-primary" (click)="navigateToBrowserPage()">Return</button>
       </div>
     </div>
   </div>

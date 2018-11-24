@@ -25,6 +25,7 @@ import { AuthGuard } from '../components/core/auth.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookResolver } from '../components/book/book.resolver';
 import { NavbarComponent } from '../components/navbar/navbar.component';
+import { BookRatingComponent } from '../components/book-rating/book-rating.component';
 import { CartComponent } from '../components/cart/cart.component';
 import { CartResolver } from '../components/cart/cart.resolver';
 import { ReviewsComponent } from '../components/reviews/reviews.component';
@@ -44,6 +45,7 @@ import { AuthorComponent } from '../components/author/author.component';
     BookComponent,
     BookDetailsComponent,
     NavbarComponent,
+    BookRatingComponent,
     ReviewsComponent,
     CartComponent,
     CardNumValidDirective,

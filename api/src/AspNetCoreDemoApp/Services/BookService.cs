@@ -133,5 +133,42 @@ namespace AspNetCoreDemoApp.Services
 
             return commands;
         }
+
+        public bool UpdateRating(string bookId, double rating)
+        {
+            Book book = FindById(bookId);
+
+            if (book != null)
+            {
+                bool parsedRating = double.TryParse(book.Rating, out double oldRating);
+                bool parsedRatingsCount = int.TryParse(book.RatingsCount, out int oldRatingsCount);
+
+                if (!parsedRating || !parsedRatingsCount)
+                {
+                    return false;
+                }
+
+                if (oldRatingsCount == 0)
+                {
+                    book.Rating = rating.ToString();
+                    book.RatingsCount = 1.ToString();
+                }
+
+                else
+                {
+                    int newRatingsCount = oldRatingsCount + 1;
+                    double newRating = ((oldRating * oldRatingsCount) + rating) / newRatingsCount;
+
+                    book.Rating = newRating.ToString();
+                    book.RatingsCount = newRatingsCount.ToString();
+                }
+
+                Update(bookId, book);
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
