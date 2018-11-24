@@ -49,10 +49,8 @@ export class CartComponent implements OnInit {
   }
 
   purchase() {
-    let i = 0;
     while (this.cart.products.length != 0) {
-      this.cartService.removeFromCart(this.cart, this.cart.products[i]);
-      i++;
+      this.cartService.removeFromCart(this.cart, this.cart.products[0]);
     }
     this.getCart();
   }
