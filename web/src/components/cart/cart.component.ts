@@ -49,9 +49,7 @@ export class CartComponent implements OnInit {
   }
 
   purchase() {
-    while (this.cart.products.length != 0) {
-      this.cartService.removeFromCart(this.cart, this.cart.products[0]);
-    }
+    this.cartService.purchase(this.cart);
     this.getCart();
   }
 
@@ -61,6 +59,7 @@ export class CartComponent implements OnInit {
         id: data['id'],
         products: data['products'],
         savedForLater: data['savedForLater'],
+        purchased: data['purchased'],
         totalPrice: data['totalPrice']
       });
   }

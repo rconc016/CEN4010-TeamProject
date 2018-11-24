@@ -29,6 +29,17 @@ export class CartService {
   ) {
   }
 
+  purchase(cart:FirebaseCartModel) {
+    for(let i = 0; i < cart.products.length; i++) {
+      cart.purchased.push(cart.products[i]);
+    }
+    
+    cart.products = [];
+    this.totalPrice(cart);
+    this.updateCart(cart).subscribe(res=>{});
+
+  }
+
   // Adding new Product to cart db 
   addToCart(cart: FirebaseCartModel, product: Book): void {
     cart.products.push(product);
