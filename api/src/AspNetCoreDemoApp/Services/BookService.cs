@@ -8,6 +8,7 @@ namespace AspNetCoreDemoApp.Services
     public class BookService : IBookService
     {
         private const string CollectionId = "book";
+        private const string DescriptionCollectionId = "bookdescription";
 
 		private IFirestoreService firestoreService;
         private IFilterService filterService;
@@ -58,6 +59,11 @@ namespace AspNetCoreDemoApp.Services
         public Book FindById(string bookId)
         {
             return firestoreService.FindById<Book>(CollectionId, bookId);
+        }
+
+        public BookDescription FindDescriptionById(string descriptionId)
+        {
+            return firestoreService.FindById<BookDescription>(DescriptionCollectionId, descriptionId);
         }
 
         /// <summary>

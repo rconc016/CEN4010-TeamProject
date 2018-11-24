@@ -44,5 +44,22 @@ namespace AspNetCoreDemoApp.Controllers
 
 			return book;
 		}
-	}
+
+        /// <summary>
+        /// GET endpoint to retrieve a single book's description.
+        /// </summary>
+        /// <param name="descriptionId">The ID of the book description to look for.</param>
+        /// <returns>The book description with the corresponding ID.</returns>
+        [HttpGet("description/{descriptionId}")]
+        public ActionResult<BookDescription> GetDescription(string descriptionId)
+        {
+            BookDescription description = bookService.FindDescriptionById(descriptionId);
+            if (description == null)
+            {
+                return NotFound();
+            }
+
+            return description;
+        }
+    }
 }

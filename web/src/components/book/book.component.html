@@ -144,7 +144,7 @@
             <mat-card *ngFor="let book of books; let i = index" [attr.data-index]="i">
               <mat-card-header>
                 <mat-card-title><b>{{book.title}}</b></mat-card-title>
-                <mat-card-subtitle class="mat-card-author">by <a [href]="router.url + '?author=' + book.author">{{book.author}}</a></mat-card-subtitle>
+                <mat-card-subtitle class="mat-card-author">by <a href="author/{{book.authorId}}">{{book.author}}</a></mat-card-subtitle>
               </mat-card-header>
               <mat-card-subtitle class="mat-card-price text-right">{{book.price | currency}}</mat-card-subtitle>
               <img mat-card-image src="{{book.imageUrl}}" alt="Book image">
