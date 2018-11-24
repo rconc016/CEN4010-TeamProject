@@ -23,6 +23,7 @@ export class BookDetailsComponent implements OnInit {
   public constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
     private userService : UserService, private cartComponent : CartComponent) { 
     this.book = this.useTestData ? this.getTestData() : this.getData();
+    this.user = new FirebaseUserModel();
   }
 
   private getTestData() {
@@ -49,18 +50,6 @@ export class BookDetailsComponent implements OnInit {
   }
 
   public addToCart(product: Book) {
-    console.log(this.user);
-    if (this.user.id == "") {
-      this.router.navigate(['login']);
-    }
-
-    this.cartComponent.addProduct(product, this.user.id);
-    
-  }
-
-  public ngOnInit() {
-    this.user = new FirebaseUserModel();
-    console.log(this.user);
     this.userService.getUser(this.user.id)
         .subscribe((data: FirebaseUserModel) => this.user = { 
           billingAddress: data['billingAddress'],
@@ -74,6 +63,15 @@ export class BookDetailsComponent implements OnInit {
           image: data['image'],
           name: data['name'],
           creditCards: data['creditCards']
-        });
+        } );
+    if (this.user.id == "") {
+      this.router.navigate(['login']);
+    }
+    this.cartComponent.addProduct(product, this.user.id);
+    
+  }
+
+  public ngOnInit() {
+    
   }
 }
