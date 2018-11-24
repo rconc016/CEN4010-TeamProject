@@ -14,35 +14,46 @@ export class CartComponent implements OnInit {
   cart: FirebaseCartModel;
   showDataNotFound: true;
 
-  //Not found messages
-  messageTitle = "No Products Found in Cart";
-  messageDescription = "Please add items to cart";
-
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private route: ActivatedRoute,
   ) {
-    this.cart = new FirebaseCartModel;
+    this.cart = new FirebaseCartModel();
   }
 
   ngOnInit(): void {
-  
+    this.route.data.subscribe((data) => {
+      this.cart = data['cartResolver'];
+    });
   }
 
   addProduct(product: Book, userId:string) {
-
     this.cartService.addToCart(this.cart, product);
     this.getCart();
+    
   }
 
   removeProduct(product: Book) {
     this.cartService.removeFromCart(this.cart, product);
-
     this.getCart();
   }
 
   saveProduct(product: Book) {
     this.cartService.saveForLater(this.cart, product);
+    this.getCart();
+  }
 
+  removeSaved(product: Book) {
+    this.cartService.removeSavedFromCart(this.cart, product);
+    this.getCart();
+  }
+
+  purchase() {
+    let i = 0;
+    while (this.cart.products.length != 0) {
+      this.cartService.removeFromCart(this.cart, this.cart.products[i]);
+      i++;
+    }
     this.getCart();
   }
 
@@ -53,13 +64,7 @@ export class CartComponent implements OnInit {
         products: data['products'],
         savedForLater: data['savedForLater'],
         totalPrice: data['totalPrice']
-      });;
-
-    if (this.cart.products == null) {
-      this.messageTitle;
-      this.messageDescription;
-    }
-    
+      });
   }
 
 }

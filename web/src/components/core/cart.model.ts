@@ -8,17 +8,15 @@ export class FirebaseCartModel {
   totalPrice: number;
 
   constructor() {
+    this.products = [];
+    this.savedForLater = [];
+    this.totalPrice = 0;
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-
         this.id = user.uid;
       } else {
         this.id = '';
       }
     });
-
-    this.products = [];
-    this.savedForLater = [];
-    this.totalPrice = 0;
   }
 }
