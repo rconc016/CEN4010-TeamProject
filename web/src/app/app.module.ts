@@ -47,7 +47,7 @@ import { AuthorComponent } from '../components/author/author.component';
     CartComponent,
     CardNumValidDirective,
     CardExpDateValidDirective,
-    CardCvcValidDirective
+    CardCvcValidDirective,
     NavbarComponent,
     AuthorComponent
   ],
