@@ -1,22 +1,29 @@
-import { Injectable } from "@angular/core";
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot, Router } from "@angular/router";
 import { CartService } from '../core/cart.service';
-import { FirebaseCartModel } from "../core/cart.model";
+import { UserService } from '../core/user.service';
+import { FirebaseCartModel } from '../core/cart.model';
+import { FirebaseUserModel } from '../core/user.model';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CartResolver implements Resolve<FirebaseCartModel> {
 
-  constructor(private cartService: CartService) {
-  }
+  constructor(public cartService: CartService, public userService:UserService, private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FirebaseCartModel> {
+  resolve(route: ActivatedRouteSnapshot) : Promise<FirebaseCartModel> {
 
-    let cart = new FirebaseCartModel();
+    let user = new FirebaseUserModel();
 
-    return this.cartService.getCart(cart.id);
+    return new Promise((resolve, reject) => {
+      this.userService.getCurrentUser()
+      .then(res => {
+        resolve(this.cartService.getCart(user.id).toPromise())
+      }, err => {
+        this.router.navigate(['/login']);
+        return reject(err);
+      })
+    })
   }
 
 }
