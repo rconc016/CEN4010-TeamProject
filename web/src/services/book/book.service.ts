@@ -6,6 +6,7 @@ import { SortCommand } from '../../common/models/sortcommand';
 import { BookFilterCommand } from '../../common/models/bookfiltercommand';
 import { PageCommand } from '../../common/models/pagecommand';
 import { BookInterface } from '../../components/book.details/book.interface';
+import { BookDescription } from '../../components/book.details/book.description.model';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +70,12 @@ export class BookService {
     };
 
     return this.http.post(`${this.url}/rate`, body);
+  
+  /**
+   * Retreives the description of a single book.
+   * @param descriptionId The ID of the book description to look for.
+   */
+  public findDescriptionById(descriptionId: string) {
+    return this.http.get<BookDescription>(`${this.url}/description/${descriptionId}`);
   }
 }

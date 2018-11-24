@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col">
       <div class="row image-container">
-        <img class="book-image" src="{{book.imageUrl}}"/>
+        <img class="book-image" (click)="openDialog(book.imageUrl)" src="{{book.imageUrl}}"/>
         <img *ngIf="book.topSeller" class="top-seller" src="assets/img/top-seller.png"/>
       </div>
       <div class="row">
@@ -20,6 +20,9 @@
         <div class="col">
           <button class="btn btn-link"><a href="{{router.url}}/rate">Rate It</a></button>
         </div>
+      <div class="row"><ngb-rating rate="{{book.rating}}" readonly="true" max="5"></ngb-rating></div>
+      <div class="row return-button-row">
+        <button type="button" class="btn btn-primary" (click)="navigateToBrowserPage()">Return</button>
       </div>
     </div>
     <div class="col">
@@ -27,19 +30,23 @@
         <div class="panel panel-default details-panel"> 
           <div class="panel-heading">About</div>
           <div class="panel-body details-panel-body">
-            <div class="row">Author: {{book.author}}</div>
+            <div class="row">Author: <a [href]="'author/' + book.authorId">{{book.author}}</a></div>
+            <div class="row">Publisher: {{book.publisher}}</div>
             <div class="row">Release Date: {{book.releaseDate | date:'mediumDate'}}</div>
             <div class="row">Genre: {{book.genre}}</div>
             <div class="row">Price: {{book.price | currency}}</div>
           </div>
         </div>
       </div>
+      <h2 class="book-description-label">Description</h2>
+      <p>{{bookDescription.description}}</p>
+      <br>
       <div class="row">
-        <button type="button" class="btn btn-success buy-button" disabled>Purchase</button>
+        <button type="button" class="btn btn-success buy-button" (click)="addToCart(book)">Add to Cart</button>
+      </div>
+      <div class="row">
+        <div class="col"><app-reviews [bookId]="this.route.snapshot.params['id']"></app-reviews></div>
       </div>
     </div>
-  </div>
-  <div class="row return-button-row">
-    <button type="button" class="btn btn-primary" (click)="navigateToBrowserPage()">Return</button>
   </div>
 </div>

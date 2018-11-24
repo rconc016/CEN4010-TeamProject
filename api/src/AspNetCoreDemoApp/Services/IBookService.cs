@@ -33,6 +33,12 @@ namespace AspNetCoreDemoApp.Services
         Book FindById(string bookId);
 
         /// <summary>
+        /// Finds the book description with the given ID.
+        /// </summary>
+        /// <param name="descriptionId">The ID of the description to look for.</param>
+        BookDescription FindDescriptionById(string descriptionId);
+
+        /// <summary>
         /// Converts the given book filter command to a generic list of filter commands.
         /// </summary>
         /// <param name="command">The book specific filter command.</param>

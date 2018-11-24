@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import { Card } from './card.model';
 
 export class FirebaseUserModel {
   image: string;
@@ -9,8 +10,9 @@ export class FirebaseUserModel {
   email: string;
   id: string;
   billingAddress: string;
-  shippingAddress: string;
+  shippingAddress: string[];
   nickname: string;
+  creditCards: Card[];
 
   constructor(){
     this.image = '';
@@ -20,6 +22,8 @@ export class FirebaseUserModel {
     this.lastName = '';
     this.email = '';
     this.nickname = '';
+    this.shippingAddress = [];
+    this.creditCards = [];
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
 

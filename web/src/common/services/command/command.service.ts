@@ -4,6 +4,7 @@ import { BookFilterCommand } from '../../models/bookfiltercommand';
 import { PageCommand } from '../../models/pagecommand';
 import { SortCommand } from '../../models/sortcommand';
 import { isNullOrUndefined } from 'util';
+import { Review } from '../../../components/reviews/review.model';
 
 @Injectable({
   providedIn: 'root'

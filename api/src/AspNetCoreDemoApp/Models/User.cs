@@ -1,6 +1,7 @@
 using System;
 using Google.Cloud.Firestore;
 
+
 namespace AspNetCoreDemoApp.Models
 {
     [FirestoreData]
@@ -30,9 +31,12 @@ namespace AspNetCoreDemoApp.Models
         public string BillingAddress { get; set; }
 
         [FirestoreProperty(name: "shippingAddress")]
-        public string ShippingAddress { get; set; }
+        public string[] ShippingAddress { get; set; }
 
         [FirestoreProperty(name: "email")]
         public string Email { get; set; }
+
+        [FirestoreProperty(name: "creditCards")]
+        public Card[] CreditCards { get; set; }
     }
 }
