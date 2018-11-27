@@ -1,9 +1,12 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { UserComponent } from '../user/user.component';
 import { ReviewService } from '../../services/review/review.service';
 import { Review } from './review.model';
 import { UserService } from '../core/user.service';
 import { FirebaseUserModel } from '../core/user.model';
 import { StringUtils } from '../../common/utils/stringutils';
+
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-reviews',
@@ -11,17 +14,19 @@ import { StringUtils } from '../../common/utils/stringutils';
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent implements OnInit {
-  private static readonly anonymousUser = 'Hidden';
+  private static readonly anonymousUser = 'Anonymous User';
 
   @Input() public bookId: string;
   public reviews: Review[];
   public reviewComment: string;
   public useNickname: boolean;
   public isAnonymous: boolean;
+  
+  public currentUserId: string;
 
   private canSubmitReview: boolean;
 
-  public constructor(private reviewService: ReviewService, private userService: UserService) {
+  public constructor(private reviewService: ReviewService, private userService: UserService, private globalUser: UserComponent) {
     this.reviews = [];
   }
   
@@ -30,7 +35,13 @@ export class ReviewsComponent implements OnInit {
     this.useNickname = true;
     this.isAnonymous = false;
     this.canSubmitReview = true;
-
+	
+	var user = firebase.auth().currentUser;
+	
+	if (user != null) {
+	  this.currentUserId = user.uid;
+	}
+	
     this.loadData();
   }
 
@@ -38,6 +49,7 @@ export class ReviewsComponent implements OnInit {
    * Loads all the reviews.
    */
   private loadData() {
+	console.log("User ID is currently: " + this.currentUserId);
     if (this.bookId) {
       this.reviewService.findAllByBookId(this.bookId)
         .subscribe((result: Review[]) => {
@@ -65,12 +77,12 @@ export class ReviewsComponent implements OnInit {
 
       let review         = new Review();
       review.bookId      = this.bookId;
-      review.userId      = await this.getUserId();
+      review.userId      = this.currentUserId;
       review.date        = new Date();
       review.comment     = this.reviewComment;
       review.useNickname = this.useNickname;
       review.anonymous   = this.isAnonymous;
-
+	  
       if (this.isReviewValid(review)) {
         this.reviewService.create(review)
           .subscribe(() => {
@@ -79,7 +91,7 @@ export class ReviewsComponent implements OnInit {
       }
 
       else {
-        window.location.reload();
+        //window.location.reload();
         console.error("Error: Failed to create review.");
       }
     }
@@ -93,6 +105,7 @@ export class ReviewsComponent implements OnInit {
       .then((user: FirebaseUserModel) => {
         return user.id;
       }, () => {
+		console.log("Null user");
         return null;
       })
   }
@@ -103,8 +116,17 @@ export class ReviewsComponent implements OnInit {
    */
   private isReviewValid(review: Review) {
     let isBookIdValid = !StringUtils.isNullOrEmpty(review.bookId);
+	
+		if (isBookIdValid) { console.log("Book ID IS VALID");} else { console.error("Book ID is NOT valid");} //debug
+	
     let isUserIdValid = !StringUtils.isNullOrEmpty(review.userId);
+	
+		if (isUserIdValid) { console.log("User ID IS VALID");} else { console.error("User ID is NOT valid");} //debug
+	
     let isCommentValid = !StringUtils.isNullOrEmpty(review.comment);
+	
+		if (isCommentValid) { console.log("Comment ID IS VALID");} else { console.error("Comment ID is NOT valid");} //debug
+	
 
     return isBookIdValid && isUserIdValid && isCommentValid;
   }

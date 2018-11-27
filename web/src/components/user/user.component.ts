@@ -15,8 +15,10 @@ import * as Payment from 'payment';
   styleUrls: ['user.scss']
 })
 
+@Injectable()
 export class UserComponent implements OnInit {
   user: FirebaseUserModel;
+  globalCurrentUserId: string = 'testytest ID';
   profileForm: FormGroup;
   successMessageEmail: string = '';
   errorMessageEmail: string = '';
@@ -43,6 +45,7 @@ export class UserComponent implements OnInit {
     })
     
     this.getUser();
+	this.globalCurrentUserId = this.user.id;
   }
 
   createForm(name) {
@@ -129,6 +132,11 @@ export class UserComponent implements OnInit {
     }, (error) => {
       console.log("Logout error", error);
     });
+  }
+  
+  passUserId() {
+	this.getUser();
+	return this.user;
   }
 
   getUser() {
